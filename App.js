@@ -1,20 +1,34 @@
 import { StatusBar } from "expo-status-bar"
-import { StyleSheet, Text, View } from "react-native"
+import { NavigationContainer } from "@react-navigation/native"
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import { useState } from "react"
+import SignIn from "./screens/SignIn"
+import AnimalLocation from "./screens/AnimalLocation"
+
+const Stack = createNativeStackNavigator()
 
 export default function App() {
+  //  TODO: Implement auth flow
+  const [isSignedIn] = useState(false)
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          {isSignedIn ? (
+            <>
+              <Stack.Screen
+                name={"AnimalLocation"}
+                component={AnimalLocation}
+              />
+            </>
+          ) : (
+            <Stack.Screen name={"SignIn"} component={SignIn} />
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+
       <StatusBar style="auto" />
-    </View>
+    </>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-})
