@@ -1,17 +1,17 @@
 import styled from "styled-components/native"
 
-export const Container = styled.SafeAreaView`
+export const SafeAreaViewContent = styled.SafeAreaView`
   flex: 1;
   align-items: center;
   justify-content: center;
 `
 
-export const WrapperReportedAnimalPreDetails = styled.View`
+export const ViewReportedAnimalPreDetails = styled.View`
   position: absolute;
   top: 30px;
 `
 
-export const WrapperMenu = styled.View`
+export const ViewMenu = styled.View`
   position: absolute;
   bottom: 50px;
 `

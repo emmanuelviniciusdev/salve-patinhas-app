@@ -1,8 +1,8 @@
 import { Dimensions, Text, View } from "react-native"
 import {
-  Container,
-  WrapperMenu,
-  WrapperReportedAnimalPreDetails,
+  SafeAreaViewContent,
+  ViewMenu,
+  ViewReportedAnimalPreDetails,
 } from "./styles"
 import MapView from "react-native-maps"
 import ReportedAnimalSignalMarker from "../../components/ReportedAnimalSignalMarker"
@@ -10,7 +10,7 @@ import { ReportedAnimalPreDetails } from "../../components/ReportedAnimalPreDeta
 
 export default function AnimalLocation() {
   return (
-    <Container>
+    <SafeAreaViewContent>
       <MapView
         style={mapViewStyles}
         region={{
@@ -23,14 +23,17 @@ export default function AnimalLocation() {
         <ReportedAnimalSignalMarker
           coordinate={{ latitude: 37.78825, longitude: -122.4324 }}
         />
+        <ReportedAnimalSignalMarker
+          coordinate={{ latitude: 37.77725, longitude: -122.4334 }}
+        />
       </MapView>
-      <WrapperReportedAnimalPreDetails>
+      <ViewReportedAnimalPreDetails>
         <ReportedAnimalPreDetails />
-      </WrapperReportedAnimalPreDetails>
-      <WrapperMenu>
+      </ViewReportedAnimalPreDetails>
+      <ViewMenu>
         <Text>Menu</Text>
-      </WrapperMenu>
-    </Container>
+      </ViewMenu>
+    </SafeAreaViewContent>
   )
 }
 
