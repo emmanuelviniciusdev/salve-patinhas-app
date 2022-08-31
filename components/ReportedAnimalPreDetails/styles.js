@@ -7,6 +7,7 @@ export const ViewContent = styled.View`
   justify-content: center;
   align-items: center;
   margin: 10px;
+  min-height: 80px;
 `
 
 export const ImageAnimalPicture = styled.Image`
@@ -38,6 +39,6 @@ export const IconExpand = styled(MdiOpenInFullRoundedSvg).attrs({
 })`
   color: ${(props) => props.theme.color};
   position: absolute;
-  bottom: 5px;
-  right: 5px;
+  bottom: -2px;
+  right: 0;
 `

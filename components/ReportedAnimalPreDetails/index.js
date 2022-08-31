@@ -7,20 +7,27 @@ import {
   ViewContent,
   ViewDetails,
 } from "./styles"
+import { useAnimalLocationContext } from "../../contexts/AnimalLocationContext"
+import { limitTextSize } from "../../utils"
 
 export function ReportedAnimalPreDetails() {
+  const { animalDetails } = useAnimalLocationContext()
+
+  if (!animalDetails.data) {
+    return <></>
+  }
+
   return (
     <AppContainer>
       <ViewContent>
-        <ImageAnimalPicture
-          source={require("../../assets/images/cachorro-deitado-calcada.jpg")}
-        />
+        <ImageAnimalPicture source={{ uri: animalDetails.data.pictureUrl }} />
         <ViewDetails>
           <TextPreDescription>
-            Cão branco, porte médio, parece ter dono, visto em frente ao
-            supermerc...
+            {limitTextSize(animalDetails.data.description, 55)}
           </TextPreDescription>
-          <TextAddress>Rua Clodovaldo, Jd. Paraíso, Campinas, SP</TextAddress>
+          <TextAddress>
+            {limitTextSize(animalDetails.data.address, 40)}
+          </TextAddress>
         </ViewDetails>
         <IconExpand />
       </ViewContent>

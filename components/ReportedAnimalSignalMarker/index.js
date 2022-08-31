@@ -24,24 +24,23 @@ function getReportSignalIcon(colorScheme, isPressed) {
   return mapIconStates[state]
 }
 
-export default function ReportedAnimalSignalMarker({
-  coordinate,
-  onPress,
-  isPressed = false,
-}) {
-  const { animalDetails, setAnimalDetails } = useAnimalLocationContext()
-  console.log("animalDetails", animalDetails)
+export default function ReportedAnimalSignalMarker({ coordinate }) {
+  const { setAnimalDetails, lastPressedCoordinate } = useAnimalLocationContext()
 
-  useEffect(() => {
-    setAnimalDetails().then()
-  }, [])
+  const isPressed =
+    lastPressedCoordinate &&
+    lastPressedCoordinate.latitude === coordinate.latitude &&
+    lastPressedCoordinate.longitude === coordinate.longitude
 
   const systemColorScheme = useColorScheme()
 
   const ReportSignalIcon = getReportSignalIcon(systemColorScheme, isPressed)
 
   return (
-    <Marker coordinate={coordinate} onPress={onPress}>
+    <Marker
+      coordinate={coordinate}
+      onPress={() => setAnimalDetails(coordinate)}
+    >
       <ReportSignalIcon />
     </Marker>
   )
