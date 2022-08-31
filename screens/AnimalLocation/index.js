@@ -9,6 +9,8 @@ import ReportedAnimalSignalMarker from "../../components/ReportedAnimalSignalMar
 import { ReportedAnimalPreDetails } from "../../components/ReportedAnimalPreDetails"
 import { AnimalLocationProvider } from "../../contexts/AnimalLocationContext"
 
+const LATITUDE_AND_LONGITUDE_DELTA = 0.015
+
 export default function AnimalLocation() {
   return (
     <AnimalLocationProvider>
@@ -18,8 +20,8 @@ export default function AnimalLocation() {
           region={{
             latitude: 37.78825,
             longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
+            latitudeDelta: LATITUDE_AND_LONGITUDE_DELTA,
+            longitudeDelta: LATITUDE_AND_LONGITUDE_DELTA,
           }}
         >
           <ReportedAnimalSignalMarker
