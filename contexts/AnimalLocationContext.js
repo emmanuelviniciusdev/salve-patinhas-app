@@ -46,7 +46,7 @@ export function AnimalLocationProvider({ children }) {
 
     let animalDetails = {}
 
-    if (coordinate.latitude === 37.78825) {
+    if (coordinate.latitude === -23.5329) {
       animalDetails = {
         description:
           "Visto em frente ao Extra Abolição, aparenta estar magro e possuía uma coleira preta",
