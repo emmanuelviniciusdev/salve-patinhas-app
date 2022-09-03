@@ -5,6 +5,7 @@ import customMapStyles from "../../screens/AnimalLocation/customMapStyles"
 import { useEffect, useState } from "react"
 import * as Location from "expo-location"
 import { useAnimalLocationContext } from "../../contexts/AnimalLocationContext"
+import { AppActivityIndicator } from "../AppActivityIndicator"
 
 const mapViewStyles = {
   width: Dimensions.get("screen").width,
@@ -38,9 +39,8 @@ export default function ReportedAnimalsMapView() {
     })()
   }, [])
 
-  // TODO: Implement loading animation
   if (!coordsLocation) {
-    return <></>
+    return <AppActivityIndicator size={"large"} />
   }
 
   return (

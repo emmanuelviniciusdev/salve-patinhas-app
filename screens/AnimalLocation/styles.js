@@ -4,6 +4,7 @@ export const SafeAreaViewContent = styled.SafeAreaView`
   flex: 1;
   align-items: center;
   justify-content: center;
+  background-color: ${(props) => props.theme.backgroundColor};
 `
 
 export const ViewReportedAnimalPreDetails = styled.View`
