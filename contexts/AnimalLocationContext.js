@@ -72,8 +72,16 @@ export function AnimalLocationProvider({ children }) {
     }, 2000)
   }
 
+  function unsetAnimalDetails() {
+    dispatch({ type: "SET_LOADING_ANIMAL_DETAILS", payload: false })
+    dispatch({ type: "SET_LAST_PRESSED_COORDINATE", payload: null })
+    dispatch({ type: "SET_ANIMAL_DETAILS", payload: null })
+  }
+
   return (
-    <AnimalLocationContext.Provider value={{ ...state, setAnimalDetails }}>
+    <AnimalLocationContext.Provider
+      value={{ ...state, setAnimalDetails, unsetAnimalDetails }}
+    >
       {children}
     </AnimalLocationContext.Provider>
   )
