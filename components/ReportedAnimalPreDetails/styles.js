@@ -10,6 +10,15 @@ export const ViewContent = styled.View`
   min-height: 80px;
 `
 
+export const WrapperActivityIndicator = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 330px;
+  height: 80px;
+  margin: 10px;
+`
+
 export const ImageAnimalPicture = styled.Image`
   width: 100px;
   height: 65px;
