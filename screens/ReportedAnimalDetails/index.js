@@ -9,10 +9,11 @@ import {
   ViewContent,
 } from "./styles"
 import ImageView from "react-native-image-viewing"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Pressable, ScrollView, Text } from "react-native"
 import EvaArrowBackFillSvg from "../../assets/icons/eva_arrow-back-fill.svg"
 import { useNavigation } from "@react-navigation/native"
+import AppActivityIndicator from "../../components/AppActivityIndicator"
 
 export default function ReportedAnimalDetails({ route }) {
   const { coordinate } = route.params
@@ -21,7 +22,36 @@ export default function ReportedAnimalDetails({ route }) {
 
   const [showImageView, setShowImageView] = useState(false)
 
+  const [fullAnimalDetails, setFullAnimalDetails] = useState()
+
   const StyledEvaArrowBackFillSvg = getStyledArrowBackIcon(EvaArrowBackFillSvg)
+
+  /**
+   * TODO: Implement backend.
+   */
+  function getFullAnimalDetails() {
+    setTimeout(() => {
+      setFullAnimalDetails({
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo pretium leo, eget dapibus risus semper et. Nunc cursus blandit mi, vulputate auctor ex tempus at. Vivamus laoreet est non purus tempus malesuada. Donec rhoncus nunc sed rhoncus aliquam. Aenean eget cursus velit, non molestie tellus. Donec eget sem pharetra, iaculis tellus quis, malesuada tortor. Pellentesque in odio magna. Curabitur iaculis, erat nec cursus facilisis, est odio eleifend nisi, vitae euismod lacus elit non sem. Cras viverra massa mauris, sed vestibulum risus placerat at. Aliquam tincidunt sodales elit, id scelerisque lorem dapibus nec. Morbi finibus ex dui. Ut gravida diam a nisl venenatis luctus. Aenean id tortor rhoncus, tempor mauris at, pellentesque nibh.",
+        address: "Rua Clodovaldo, Jd. Paraíso, Campinas, SP",
+        pictureUrl:
+          "https://www.portaldoanimal.org/wp-content/uploads/2018/06/Cinco-pequenas-crian%C3%A7as-salvaram-sozinhas-cachorro-abandonado-em-rua-movimentada1.jpg",
+      })
+    }, 2000)
+  }
+
+  useEffect(() => {
+    getFullAnimalDetails()
+  }, [])
+
+  if (!fullAnimalDetails) {
+    return (
+      <AppSafeAreaView>
+        <AppActivityIndicator size={"large"} />
+      </AppSafeAreaView>
+    )
+  }
 
   return (
     <AppSafeAreaView>
@@ -29,7 +59,7 @@ export default function ReportedAnimalDetails({ route }) {
         imageIndex={0}
         images={[
           {
-            uri: "https://www.portaldoanimal.org/wp-content/uploads/2018/06/Cinco-pequenas-crian%C3%A7as-salvaram-sozinhas-cachorro-abandonado-em-rua-movimentada1.jpg",
+            uri: fullAnimalDetails.pictureUrl,
           },
         ]}
         visible={showImageView}
@@ -43,31 +73,16 @@ export default function ReportedAnimalDetails({ route }) {
           <Pressable onPress={() => setShowImageView(true)}>
             <ImageAnimalPicture
               source={{
-                uri: "https://www.portaldoanimal.org/wp-content/uploads/2018/06/Cinco-pequenas-crian%C3%A7as-salvaram-sozinhas-cachorro-abandonado-em-rua-movimentada1.jpg",
+                uri: fullAnimalDetails.pictureUrl,
               }}
             />
           </Pressable>
           <TextLabel>Descrição</TextLabel>
           <TextDescription>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare
-            viverra metus at sagittis. Donec nec volutpat nisi. Nullam nec lacus
-            vitae orci feugiat posuere. Vestibulum lobortis lectus enim, nec
-            malesuada sapien posuere vel. Nullam vel lectus feugiat, cursus
-            dolor et, imperdiet urna. Nunc id pulvinar nunc. Curabitur ut tempus
-            ipsum. Curabitur a dapibus eros. Duis ornare odio quis lorem
-            eleifend, nec tincidunt tellus feugiat. Etiam in elementum justo.
-            Suspendisse ac ullamcorper lacus. Praesent imperdiet id turpis vel
-            dapibus. Nulla ut ligula blandit, volutpat sem ullamcorper, tempor
-            purus. Pellentesque ipsum ipsum, commodo in sem nec, laoreet commodo
-            turpis. Aliquam suscipit porttitor imperdiet. Sed sagittis metus eu
-            placerat mollis. Pellentesque congue quis dui id sollicitudin.
-            Aliquam accumsan efficitur libero eu tincidunt. Sed vitae odio vitae
-            orci imperdiet finibus at quis nibh. Curabitur ac quam justo.
-            Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci
-            luctus et ultrices posuere cubilia curae;
+            {fullAnimalDetails.description || "-"}
           </TextDescription>
           <TextLabel>Endereço</TextLabel>
-          <TextAddress>Rua Clodovaldo, Jd. Paraíso, Campinas, SP</TextAddress>
+          <TextAddress>{fullAnimalDetails.address || "-"}</TextAddress>
         </ScrollView>
       </ViewContent>
     </AppSafeAreaView>
