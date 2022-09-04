@@ -1,6 +1,7 @@
 import styled from "styled-components/native"
 import { LinearGradient } from "expo-linear-gradient"
 import { RFValue } from "react-native-responsive-fontsize"
+import { AppActivityIndicator } from "../AppActivityIndicator"
 
 const styleVariantsThemes = {
   default: {
@@ -15,8 +16,23 @@ const styleVariantsThemes = {
   },
   secondary: {
     gradientColors: ["#F2DC5D", "#C8B445"],
-    color: "#F2F5F9",
-    borderColor: "#A69327",
+    color: "#504605",
+    borderColor: "#85741c",
+  },
+  "default-disabled": {
+    gradientColors: ["#FFFFFF", "#EAEAEA"],
+    color: "#7a7a7a",
+    borderColor: "#000000",
+  },
+  "primary-disabled": {
+    gradientColors: ["#A70B0B", "#820606"],
+    color: "#ad7a7a",
+    borderColor: "#5B0808",
+  },
+  "secondary-disabled": {
+    gradientColors: ["#F2DC5D", "#C8B445"],
+    color: "#9a8420",
+    borderColor: "#85741c",
   },
 }
 
@@ -35,6 +51,12 @@ export function getLinearGradientContainer(styleVariant) {
     align-items: center;
     justify-content: center;
   `
+}
+
+export function getStyledAppActivityIndicator(styleVariant) {
+  return styled(AppActivityIndicator).attrs({
+    color: styleVariantsThemes[styleVariant].color,
+  })``
 }
 
 export const WrapperIcon = styled.View`
