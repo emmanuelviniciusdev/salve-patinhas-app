@@ -5,7 +5,7 @@ import customMapStyles from "../../screens/AnimalLocation/customMapStyles"
 import { useEffect, useState } from "react"
 import * as Location from "expo-location"
 import { useAnimalLocationContext } from "../../contexts/AnimalLocationContext"
-import { AppActivityIndicator } from "../AppActivityIndicator"
+import AppActivityIndicator from "../AppActivityIndicator"
 import { showWarningMessage } from "../../utils"
 
 const mapViewStyles = {

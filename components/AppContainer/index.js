@@ -24,7 +24,7 @@ function getShadowProps(colorScheme) {
   return shadowProps[colorScheme]
 }
 
-export function AppContainer({ children }) {
+export default function AppContainer({ children }) {
   const systemColorScheme = useColorScheme()
 
   const [shadowProps, setShadowProps] = useState(

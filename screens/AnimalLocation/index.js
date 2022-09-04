@@ -4,7 +4,7 @@ import {
   ViewMenu,
   ViewReportedAnimalPreDetails,
 } from "./styles"
-import { ReportedAnimalPreDetails } from "../../components/ReportedAnimalPreDetails"
+import ReportedAnimalPreDetails from "../../components/ReportedAnimalPreDetails"
 import { AnimalLocationProvider } from "../../contexts/AnimalLocationContext"
 import ReportedAnimalsMapView from "../../components/ReportedAnimalsMapView"
 

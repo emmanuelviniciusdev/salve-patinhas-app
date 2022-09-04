@@ -1,4 +1,4 @@
-import { AppContainer } from "../AppContainer"
+import AppContainer from "../AppContainer"
 import {
   IconExpand,
   ImageAnimalPicture,
@@ -10,7 +10,7 @@ import {
 } from "./styles"
 import { useAnimalLocationContext } from "../../contexts/AnimalLocationContext"
 import { limitTextSize } from "../../utils"
-import { AppActivityIndicator } from "../AppActivityIndicator"
+import AppActivityIndicator from "../AppActivityIndicator"
 
 function Loading() {
   return (
@@ -22,7 +22,7 @@ function Loading() {
   )
 }
 
-export function ReportedAnimalPreDetails() {
+export default function ReportedAnimalPreDetails() {
   const { animalDetails } = useAnimalLocationContext()
 
   const noData =

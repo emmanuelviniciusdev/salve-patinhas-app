@@ -1,7 +1,7 @@
 import { ActivityIndicator, useColorScheme } from "react-native"
 import { darkTheme, lightTheme } from "../../styles/themes"
 
-export function AppActivityIndicator({ color, size = "small" }) {
+export default function AppActivityIndicator({ color, size = "small" }) {
   const systemColorScheme = useColorScheme()
 
   const themeColor =

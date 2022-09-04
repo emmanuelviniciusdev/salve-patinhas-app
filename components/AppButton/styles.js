@@ -1,7 +1,7 @@
 import styled from "styled-components/native"
 import { LinearGradient } from "expo-linear-gradient"
 import { RFValue } from "react-native-responsive-fontsize"
-import { AppActivityIndicator } from "../AppActivityIndicator"
+import AppActivityIndicator from "../AppActivityIndicator"
 
 const styleVariantsThemes = {
   default: {
