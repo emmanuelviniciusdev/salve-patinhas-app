@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 import * as Location from "expo-location"
 import { useAnimalLocationContext } from "../../contexts/AnimalLocationContext"
 import AppActivityIndicator from "../AppActivityIndicator"
-import { showWarningMessage } from "../../utils"
+import { showErrorMessage, showWarningMessage } from "../../utils"
 
 const mapViewStyles = {
   width: Dimensions.get("screen").width,
@@ -25,20 +25,31 @@ export default function ReportedAnimalsMapView() {
   const { unsetAnimalDetails } = useAnimalLocationContext()
 
   useEffect(() => {
+    let currentCoordsLocation = {
+      latitude: -18.8591751,
+      longitude: -41.9536442,
+    }
+
     ;(async () => {
       try {
-        await Location.getForegroundPermissionsAsync()
-        const currentPositionLocation = await Location.getCurrentPositionAsync()
-        setCoordsLocation({
-          latitude: currentPositionLocation.coords.latitude,
-          longitude: currentPositionLocation.coords.longitude,
-        })
+        const { granted } = await Location.requestForegroundPermissionsAsync()
+
+        if (!granted) {
+          showWarningMessage(
+            "Não foi possível obter sua localização atual",
+            "Você precisa fornecer as permissões necessárias"
+          )
+          return
+        }
+
+        const currentPosition = await Location.getCurrentPositionAsync()
+
+        currentCoordsLocation.latitude = currentPosition.coords.latitude
+        currentCoordsLocation.longitude = currentPosition.coords.longitude
       } catch (e) {
-        showWarningMessage(
-          "Não foi possível obter sua localização atual",
-          "Você precisa fornecer as permissões necessárias"
-        )
-        setCoordsLocation({ latitude: -18.8591751, longitude: -41.9536442 })
+        showErrorMessage("Erro ao tentar obter localização atual")
+      } finally {
+        setCoordsLocation(currentCoordsLocation)
       }
     })()
   }, [])
