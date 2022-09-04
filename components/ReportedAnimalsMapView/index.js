@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import * as Location from "expo-location"
 import { useAnimalLocationContext } from "../../contexts/AnimalLocationContext"
 import { AppActivityIndicator } from "../AppActivityIndicator"
+import { showWarningMessage } from "../../utils"
 
 const mapViewStyles = {
   width: Dimensions.get("screen").width,
@@ -33,8 +34,11 @@ export default function ReportedAnimalsMapView() {
           longitude: currentPositionLocation.coords.longitude,
         })
       } catch (e) {
-        // TODO: Handle error
-        console.error(e)
+        showWarningMessage(
+          "Não foi possível obter sua localização atual",
+          "Você precisa fornecer as permissões necessárias"
+        )
+        setCoordsLocation({ latitude: -18.8591751, longitude: -41.9536442 })
       }
     })()
   }, [])

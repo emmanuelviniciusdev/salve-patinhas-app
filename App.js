@@ -8,6 +8,7 @@ import { Inter_700Bold } from "@expo-google-fonts/inter"
 import { Nunito_400Regular, Nunito_500Medium } from "@expo-google-fonts/nunito"
 import AppLoading from "expo-app-loading/build/AppLoadingNativeWrapper"
 import Routes from "./routes"
+import FlashMessage from "react-native-flash-message"
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -42,6 +43,8 @@ export default function App() {
       </ThemeProvider>
 
       <StatusBar style="auto" />
+
+      <FlashMessage />
     </>
   )
 }
