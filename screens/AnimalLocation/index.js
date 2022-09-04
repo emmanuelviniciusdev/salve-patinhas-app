@@ -1,17 +1,14 @@
 import { Text } from "react-native"
-import {
-  SafeAreaViewContent,
-  ViewMenu,
-  ViewReportedAnimalPreDetails,
-} from "./styles"
+import { ViewMenu, ViewReportedAnimalPreDetails } from "./styles"
 import ReportedAnimalPreDetails from "../../components/ReportedAnimalPreDetails"
 import { AnimalLocationProvider } from "../../contexts/AnimalLocationContext"
 import ReportedAnimalsMapView from "../../components/ReportedAnimalsMapView"
+import AppSafeAreaView from "../../components/AppSafeAreaView"
 
 export default function AnimalLocation() {
   return (
     <AnimalLocationProvider>
-      <SafeAreaViewContent>
+      <AppSafeAreaView>
         <ReportedAnimalsMapView />
         <ViewReportedAnimalPreDetails>
           <ReportedAnimalPreDetails />
@@ -19,7 +16,7 @@ export default function AnimalLocation() {
         <ViewMenu>
           <Text>Menu</Text>
         </ViewMenu>
-      </SafeAreaViewContent>
+      </AppSafeAreaView>
     </AnimalLocationProvider>
   )
 }
