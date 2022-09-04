@@ -2,11 +2,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { NavigationContainer } from "@react-navigation/native"
 import AnimalLocation from "../screens/AnimalLocation"
 import SignIn from "../screens/SignIn"
-
-export const routeNames = {
-  SIGN_IN: "SIGN_IN",
-  ANIMAL_LOCATION: "ANIMAL_LOCATION",
-}
+import routeNames from "./routeNames"
+import ReportedAnimalDetails from "../screens/ReportedAnimalDetails"
 
 const Stack = createNativeStackNavigator()
 
@@ -19,6 +16,10 @@ export default function Routes({ isSignedIn }) {
             <Stack.Screen
               name={routeNames.ANIMAL_LOCATION}
               component={AnimalLocation}
+            />
+            <Stack.Screen
+              name={routeNames.REPORTED_ANIMAL_DETAILS}
+              component={ReportedAnimalDetails}
             />
           </>
         ) : (

@@ -11,6 +11,9 @@ import {
 import { useAnimalLocationContext } from "../../contexts/AnimalLocationContext"
 import { limitTextSize } from "../../utils"
 import AppActivityIndicator from "../AppActivityIndicator"
+import { Pressable } from "react-native"
+import { useNavigation } from "@react-navigation/native"
+import routeNames from "../../routes/routeNames"
 
 function Loading() {
   return (
@@ -23,7 +26,9 @@ function Loading() {
 }
 
 export default function ReportedAnimalPreDetails() {
-  const { animalDetails } = useAnimalLocationContext()
+  const { animalDetails, lastPressedCoordinate } = useAnimalLocationContext()
+
+  const navigation = useNavigation()
 
   const noData =
     !animalDetails || (!animalDetails.data && !animalDetails.loading)
@@ -38,20 +43,28 @@ export default function ReportedAnimalPreDetails() {
     return <Loading />
   }
 
+  function openFullDetailsScreen() {
+    navigation.navigate(routeNames.REPORTED_ANIMAL_DETAILS, {
+      coordinate: lastPressedCoordinate,
+    })
+  }
+
   return (
     <AppContainer>
-      <ViewContent>
-        <ImageAnimalPicture source={{ uri: animalDetails.data.pictureUrl }} />
-        <ViewDetails>
-          <TextPreDescription>
-            {limitTextSize(animalDetails.data.description, 55)}
-          </TextPreDescription>
-          <TextAddress>
-            {limitTextSize(animalDetails.data.address, 40)}
-          </TextAddress>
-        </ViewDetails>
-        <IconExpand />
-      </ViewContent>
+      <Pressable onPress={openFullDetailsScreen}>
+        <ViewContent>
+          <ImageAnimalPicture source={{ uri: animalDetails.data.pictureUrl }} />
+          <ViewDetails>
+            <TextPreDescription>
+              {limitTextSize(animalDetails.data.description, 55)}
+            </TextPreDescription>
+            <TextAddress>
+              {limitTextSize(animalDetails.data.address, 40)}
+            </TextAddress>
+          </ViewDetails>
+          <IconExpand />
+        </ViewContent>
+      </Pressable>
     </AppContainer>
   )
 }
