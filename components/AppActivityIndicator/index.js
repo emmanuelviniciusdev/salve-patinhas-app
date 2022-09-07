@@ -7,5 +7,11 @@ export default function AppActivityIndicator({ color, size = "small" }) {
   const themeColor =
     systemColorScheme === "dark" ? darkTheme.color : lightTheme.color
 
-  return <ActivityIndicator color={color ?? themeColor} size={size} />
+  return (
+    <ActivityIndicator
+      color={color ?? themeColor}
+      size={size}
+      testID={"AppActivityIndicator"}
+    />
+  )
 }

@@ -29,20 +29,23 @@ export default function ReportedAnimalDetails({ route }) {
   /**
    * TODO: Implement backend.
    */
-  function getFullAnimalDetails() {
-    setTimeout(() => {
-      setFullAnimalDetails({
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo pretium leo, eget dapibus risus semper et. Nunc cursus blandit mi, vulputate auctor ex tempus at. Vivamus laoreet est non purus tempus malesuada. Donec rhoncus nunc sed rhoncus aliquam. Aenean eget cursus velit, non molestie tellus. Donec eget sem pharetra, iaculis tellus quis, malesuada tortor. Pellentesque in odio magna. Curabitur iaculis, erat nec cursus facilisis, est odio eleifend nisi, vitae euismod lacus elit non sem. Cras viverra massa mauris, sed vestibulum risus placerat at. Aliquam tincidunt sodales elit, id scelerisque lorem dapibus nec. Morbi finibus ex dui. Ut gravida diam a nisl venenatis luctus. Aenean id tortor rhoncus, tempor mauris at, pellentesque nibh.",
-        address: "Rua Clodovaldo, Jd. Paraíso, Campinas, SP",
-        pictureUrl:
-          "https://www.portaldoanimal.org/wp-content/uploads/2018/06/Cinco-pequenas-crian%C3%A7as-salvaram-sozinhas-cachorro-abandonado-em-rua-movimentada1.jpg",
-      })
-    }, 2000)
+  async function getFullAnimalDetails() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        setFullAnimalDetails({
+          description:
+            "Tinha uma coleira vermelha. Bem cuidado. Parece ter algum dono!",
+          address: "Rua Clodovaldo, Jd. Paraíso, Campinas, SP",
+          pictureUrl:
+            "https://www.portaldoanimal.org/wp-content/uploads/2018/06/Cinco-pequenas-crian%C3%A7as-salvaram-sozinhas-cachorro-abandonado-em-rua-movimentada1.jpg",
+        })
+        resolve()
+      }, 0)
+    })
   }
 
   useEffect(() => {
-    getFullAnimalDetails()
+    ;(async () => await getFullAnimalDetails())()
   }, [])
 
   if (!fullAnimalDetails) {
@@ -75,6 +78,7 @@ export default function ReportedAnimalDetails({ route }) {
               source={{
                 uri: fullAnimalDetails.pictureUrl,
               }}
+              testID={"ImageAnimalPicture"}
             />
           </Pressable>
           <TextLabel>Descrição</TextLabel>
