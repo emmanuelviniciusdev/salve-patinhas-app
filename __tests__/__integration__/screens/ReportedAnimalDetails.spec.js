@@ -1,4 +1,5 @@
 import {
+  fireEvent,
   render,
   screen,
   waitForElementToBeRemoved,
@@ -7,14 +8,26 @@ import ReportedAnimalDetails from "../../../screens/ReportedAnimalDetails"
 import routeNames from "../../../routes/routeNames"
 import { Stack, TestContainer } from "../index"
 
+const mockedNavigationGoBack = jest.fn()
+
+jest.mock("@react-navigation/native", () => {
+  const requireActual = jest.requireActual("@react-navigation/native")
+  return {
+    ...requireActual,
+    useNavigation: () => ({
+      goBack: mockedNavigationGoBack,
+    }),
+  }
+})
+
 /**
  * TODO: Mock API requests after implement backend.
  * For this, a library like Mirage can be used: https://miragejs.com/quickstarts/react-native/development/
  */
 
 describe("ReportedAnimalDetails", () => {
-  it("should load the animal details", async () => {
-    const testContainer = (
+  beforeEach(() => {
+    render(
       <TestContainer>
         <Stack.Screen
           name={routeNames.REPORTED_ANIMAL_DETAILS}
@@ -23,13 +36,9 @@ describe("ReportedAnimalDetails", () => {
         />
       </TestContainer>
     )
+  })
 
-    render(testContainer)
-
-    const loadingIndicator = screen.queryByTestId("AppActivityIndicator")
-
-    expect(loadingIndicator).toBeTruthy()
-
+  it("should load the animal details", async () => {
     await waitForElementToBeRemoved(() =>
       screen.queryByTestId("AppActivityIndicator")
     )
@@ -48,7 +57,30 @@ describe("ReportedAnimalDetails", () => {
     expect(reportedAnimalAddress).toBeTruthy()
   })
 
-  it("should open the picture of the animal in fullscreen mode", () => {})
+  it("should open the picture of the animal in fullscreen mode", async () => {
+    await waitForElementToBeRemoved(() =>
+      screen.queryByTestId("AppActivityIndicator")
+    )
 
-  it("should navigate back when the arrow back button is pressed", () => {})
+    /**
+     * OBS.: "✕" is not a normal character like "X".
+     */
+    let closeModalButton = screen.queryByText("✕")
+    expect(closeModalButton).toBeFalsy()
+
+    fireEvent(screen.queryByTestId("ImageAnimalPicture"), "press")
+
+    closeModalButton = screen.queryByText("✕")
+    expect(closeModalButton).toBeTruthy()
+  })
+
+  it("should navigate back when the arrow back button is pressed", async () => {
+    await waitForElementToBeRemoved(() =>
+      screen.queryByTestId("AppActivityIndicator")
+    )
+
+    fireEvent(screen.getByTestId("navigateBackButton"), "press")
+
+    expect(mockedNavigationGoBack).toHaveBeenCalledTimes(1)
+  })
 })
