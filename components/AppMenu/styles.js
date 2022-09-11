@@ -16,6 +16,11 @@ export function getStyledIcon(icon, colorScheme, isCurrentRoute) {
   `
 }
 
+export const ViewWrapperAppMenu = styled.View`
+  position: absolute;
+  bottom: 50px;
+`
+
 export const ViewContent = styled.View`
   padding: 15px;
   flex-direction: row;

@@ -1,4 +1,4 @@
-import { ViewMenu, ViewReportedAnimalPreDetails } from "./styles"
+import { ViewReportedAnimalPreDetails } from "./styles"
 import ReportedAnimalPreDetails from "../../components/ReportedAnimalPreDetails"
 import { AnimalLocationProvider } from "../../contexts/AnimalLocationContext"
 import ReportedAnimalsMapView from "../../components/ReportedAnimalsMapView"
@@ -14,9 +14,7 @@ export default function AnimalLocation() {
         <ViewReportedAnimalPreDetails>
           <ReportedAnimalPreDetails />
         </ViewReportedAnimalPreDetails>
-        <ViewMenu>
-          <AppMenu currentRouteName={routeNames.ANIMAL_LOCATION} />
-        </ViewMenu>
+        <AppMenu currentRouteName={routeNames.ANIMAL_LOCATION} />
       </AppSafeAreaView>
     </AnimalLocationProvider>
   )
