@@ -52,8 +52,11 @@ export default function ReportedAnimalPreDetails() {
   return (
     <AppContainer>
       <Pressable onPress={openFullDetailsScreen}>
-        <ViewContent>
-          <ImageAnimalPicture source={{ uri: animalDetails.data.pictureUrl }} />
+        <ViewContent testID={"ViewContentReportedAnimalPreDetails"}>
+          <ImageAnimalPicture
+            source={{ uri: animalDetails.data.pictureUrl }}
+            testID={"ImageAnimalPicture"}
+          />
           <ViewDetails>
             <TextPreDescription>
               {limitTextSize(animalDetails.data.description, 55)}

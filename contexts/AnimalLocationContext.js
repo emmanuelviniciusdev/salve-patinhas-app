@@ -66,10 +66,8 @@ export function AnimalLocationProvider({ children }) {
 
     dispatch({ type: "SET_LOADING_ANIMAL_DETAILS", payload: true })
 
-    setTimeout(() => {
-      dispatch({ type: "SET_ANIMAL_DETAILS", payload: animalDetails })
-      dispatch({ type: "SET_LOADING_ANIMAL_DETAILS", payload: false })
-    }, 2000)
+    dispatch({ type: "SET_ANIMAL_DETAILS", payload: animalDetails })
+    dispatch({ type: "SET_LOADING_ANIMAL_DETAILS", payload: false })
   }
 
   function unsetAnimalDetails() {

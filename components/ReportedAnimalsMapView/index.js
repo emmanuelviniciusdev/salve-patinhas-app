@@ -1,7 +1,7 @@
 import ReportedAnimalSignalMarker from "../ReportedAnimalSignalMarker"
 import MapView from "react-native-maps"
 import { Dimensions, useColorScheme } from "react-native"
-import customMapStyles from "../../screens/AnimalLocation/customMapStyles"
+import customMapStyles from "./customMapStyles"
 import { useEffect, useState } from "react"
 import * as Location from "expo-location"
 import { useAnimalLocationContext } from "../../contexts/AnimalLocationContext"
@@ -22,39 +22,63 @@ export default function ReportedAnimalsMapView() {
 
   const [coordsLocation, setCoordsLocation] = useState()
 
+  const [reportedAnimalsCoords, setReportedAnimalCoords] = useState()
+
   const { unsetAnimalDetails } = useAnimalLocationContext()
 
-  useEffect(() => {
+  const loading = !coordsLocation || !reportedAnimalsCoords
+
+  async function setCurrentLocation() {
     let currentCoordsLocation = {
       latitude: -18.8591751,
       longitude: -41.9536442,
     }
 
-    ;(async () => {
-      try {
-        const { granted } = await Location.requestForegroundPermissionsAsync()
+    try {
+      const { granted } = await Location.requestForegroundPermissionsAsync()
 
-        if (!granted) {
-          showWarningMessage(
-            "Não foi possível obter sua localização atual",
-            "Você precisa fornecer as permissões necessárias"
-          )
-          return
-        }
-
-        const currentPosition = await Location.getCurrentPositionAsync()
-
-        currentCoordsLocation.latitude = currentPosition.coords.latitude
-        currentCoordsLocation.longitude = currentPosition.coords.longitude
-      } catch (e) {
-        showErrorMessage("Erro ao tentar obter localização atual")
-      } finally {
-        setCoordsLocation(currentCoordsLocation)
+      if (!granted) {
+        showWarningMessage(
+          "Não foi possível obter sua localização atual",
+          "Você precisa fornecer as permissões necessárias"
+        )
+        return
       }
+
+      const currentPosition = await Location.getCurrentPositionAsync()
+
+      currentCoordsLocation.latitude = currentPosition.coords.latitude
+      currentCoordsLocation.longitude = currentPosition.coords.longitude
+    } catch (e) {
+      showErrorMessage("Erro ao tentar obter localização atual")
+    } finally {
+      setCoordsLocation(currentCoordsLocation)
+    }
+  }
+
+  /**
+   * TODO: Implement backend.
+   */
+  async function getReportedAnimalCoords() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        setReportedAnimalCoords([
+          { latitude: -23.5329, longitude: -46.6874 },
+          { latitude: -23.5229, longitude: -46.6774 },
+        ])
+        resolve()
+      }, 0)
+    })
+  }
+
+  useEffect(() => {
+    ;(async () => {
+      await setCurrentLocation()
+      await getReportedAnimalCoords()
     })()
   }, [])
 
-  if (!coordsLocation) {
+  if (loading) {
     return <AppActivityIndicator size={"large"} />
   }
 
@@ -69,13 +93,15 @@ export default function ReportedAnimalsMapView() {
         longitudeDelta: LATITUDE_AND_LONGITUDE_DELTA,
       }}
       onPress={unsetAnimalDetails}
+      testID={"MapView"}
     >
-      <ReportedAnimalSignalMarker
-        coordinate={{ latitude: -23.5329, longitude: -46.6874 }}
-      />
-      <ReportedAnimalSignalMarker
-        coordinate={{ latitude: -23.5229, longitude: -46.6774 }}
-      />
+      {reportedAnimalsCoords &&
+        reportedAnimalsCoords.map(({ latitude, longitude }, index) => (
+          <ReportedAnimalSignalMarker
+            key={index}
+            coordinate={{ latitude, longitude }}
+          />
+        ))}
     </MapView>
   )
 }

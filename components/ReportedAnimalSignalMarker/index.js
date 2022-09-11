@@ -5,9 +5,8 @@ import ReportSignalDarkSvg from "../../assets/icons/report-signal-dark.svg"
 import ReportSignalDarkPressedSvg from "../../assets/icons/report-signal-dark-pressed.svg"
 import { useColorScheme } from "react-native"
 import { useAnimalLocationContext } from "../../contexts/AnimalLocationContext"
-import { useEffect } from "react"
 
-function getReportSignalIcon(colorScheme, isPressed) {
+function getReportSignaMarkerlIcon(colorScheme, isPressed) {
   const mapIconStates = {
     light: ReportSignalLightSvg,
     "light-pressed": ReportSignalLightPressedSvg,
@@ -34,14 +33,17 @@ export default function ReportedAnimalSignalMarker({ coordinate }) {
 
   const systemColorScheme = useColorScheme()
 
-  const ReportSignalIcon = getReportSignalIcon(systemColorScheme, isPressed)
+  const ReportSignalMarkerIcon = getReportSignaMarkerlIcon(
+    systemColorScheme,
+    isPressed
+  )
 
   return (
     <Marker
       coordinate={coordinate}
       onPress={() => setAnimalDetails(coordinate)}
     >
-      <ReportSignalIcon />
+      <ReportSignalMarkerIcon testID={"ReportSignalMarkerIcon"} />
     </Marker>
   )
 }
