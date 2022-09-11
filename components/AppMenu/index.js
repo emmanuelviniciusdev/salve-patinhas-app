@@ -7,6 +7,9 @@ import {
   ViewContentPressableIcon,
 } from "./styles"
 import MdiPawSvg from "../../assets/icons/mdi_paw.svg"
+import GisSearchPoiSvg from "../../assets/icons/gis_search-poi.svg"
+import HeroiconsSolidDotsHorizontal from "../../assets/icons/heroicons_solid-dots-horizontal.svg"
+import MdiAccount from "../../assets/icons/mdi_account.svg"
 import routeNames from "../../routes/routeNames"
 import { useColorScheme } from "react-native"
 
@@ -21,7 +24,7 @@ function PressableMenu({ Icon, textIcon, routeName, currentRouteName }) {
     <PressableIcon>
       <ViewContentPressableIcon>
         <StyledIcon />
-        {isCurrentRoute && (
+        {isCurrentRoute && textIcon && (
           <TextPressableIcon
             colorScheme={systemColorScheme}
             isCurrentRoute={isCurrentRoute}
@@ -39,26 +42,26 @@ export default function AppMenu({ currentRouteName }) {
     <AppContainer>
       <ViewContent>
         <PressableMenu
-          Icon={MdiPawSvg}
+          Icon={GisSearchPoiSvg}
           textIcon={"encontrar"}
           routeName={routeNames.ANIMAL_LOCATION}
           currentRouteName={currentRouteName}
         />
         <PressableMenu
           Icon={MdiPawSvg}
-          textIcon={"encontrar"}
+          textIcon={"adotar"}
           routeName={""}
           currentRouteName={currentRouteName}
         />
         <PressableMenu
-          Icon={MdiPawSvg}
-          textIcon={"encontrar"}
+          Icon={MdiAccount}
+          textIcon={"conta"}
           routeName={""}
           currentRouteName={currentRouteName}
         />
         <PressableMenu
-          Icon={MdiPawSvg}
-          textIcon={"encontrar"}
+          Icon={HeroiconsSolidDotsHorizontal}
+          textIcon={""}
           routeName={""}
           currentRouteName={currentRouteName}
         />
