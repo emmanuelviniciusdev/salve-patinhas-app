@@ -45,6 +45,8 @@ export default function ReportedAnimalsMapView() {
         return
       }
 
+      await Location.getForegroundPermissionsAsync()
+
       const currentPosition = await Location.getCurrentPositionAsync()
 
       currentCoordsLocation.latitude = currentPosition.coords.latitude
