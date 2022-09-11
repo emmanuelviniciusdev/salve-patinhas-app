@@ -1,13 +1,38 @@
 import AppSafeAreaView from "../../components/AppSafeAreaView"
-import { Text } from "react-native"
-import routeNames from "../../routes/routeNames"
-import AppMenu from "../../components/AppMenu"
+import { Pressable, Text } from "react-native"
+import {
+  ViewContent,
+  getStyledIcon,
+  ViewWrapperPressableCloseIcon,
+  ViewPressableMenuOptionContent,
+  TextPressableMenuOption,
+} from "./styles"
+import MdiLogout from "../../assets/icons/mdi_logout.svg"
+import MdiWindowClose from "../../assets/icons/mdi_window-close.svg"
+import { useNavigation } from "@react-navigation/native"
 
 export default function MenuMoreOptions() {
+  const navigation = useNavigation()
+
+  const StyledMdiLogout = getStyledIcon(MdiLogout)
+
+  const StyledMdiWindowClose = getStyledIcon(MdiWindowClose)
+
   return (
     <AppSafeAreaView>
-      <Text>MenuMoreOptions</Text>
-      <AppMenu currentRouteName={routeNames.MENU_MORE_OPTIONS} />
+      <ViewWrapperPressableCloseIcon>
+        <Pressable onPress={() => navigation.goBack()}>
+          <StyledMdiWindowClose />
+        </Pressable>
+      </ViewWrapperPressableCloseIcon>
+      <ViewContent>
+        <Pressable>
+          <ViewPressableMenuOptionContent>
+            <StyledMdiLogout />
+            <TextPressableMenuOption>encerrar sessão</TextPressableMenuOption>
+          </ViewPressableMenuOptionContent>
+        </Pressable>
+      </ViewContent>
     </AppSafeAreaView>
   )
 }
