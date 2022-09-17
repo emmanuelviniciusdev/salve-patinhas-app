@@ -14,6 +14,11 @@ import AppLoading from "expo-app-loading/build/AppLoadingNativeWrapper"
 import Routes from "./routes"
 import FlashMessage from "react-native-flash-message"
 
+/**
+ * TODO: Remove this before build application.
+ */
+import "./mocks/mockSalvePatinhasAPI"
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Inter_400Regular,

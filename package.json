@@ -23,6 +23,7 @@
     "@expo-google-fonts/nunito": "^0.2.2",
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/native-stack": "^6.7.0",
+    "axios": "^0.27.2",
     "expo": "~46.0.6",
     "expo-app-loading": "~2.1.0",
     "expo-font": "~10.2.0",
@@ -44,9 +45,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@testing-library/react-native": "^11.0.0",
     "jest": "^26.6.3",
     "jest-expo": "^46.0.1",
-    "@testing-library/react-native": "^11.0.0",
+    "miragejs": "^0.1.45",
     "prettier": "2.7.1"
   },
   "private": true
