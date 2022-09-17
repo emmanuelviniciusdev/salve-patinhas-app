@@ -16,4 +16,4 @@ web-build/
 # WebStorm
 .idea/
 
-.env
+environment.prd.js
