@@ -14,6 +14,8 @@ import { Pressable, ScrollView, Text } from "react-native"
 import EvaArrowBackFillSvg from "../../assets/icons/eva_arrow-back-fill.svg"
 import { useNavigation } from "@react-navigation/native"
 import AppActivityIndicator from "../../components/AppActivityIndicator"
+import appAxios from "../../abstractions/appAxios"
+import { showErrorMessage } from "../../utils"
 
 export default function ReportedAnimalDetails({ route }) {
   const { coordinate } = route.params
@@ -30,18 +32,19 @@ export default function ReportedAnimalDetails({ route }) {
    * TODO: Implement backend.
    */
   async function getFullAnimalDetails() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        setFullAnimalDetails({
-          description:
-            "Tinha uma coleira vermelha. Bem cuidado. Parece ter algum dono!",
-          address: "Rua Clodovaldo, Jd. Paraíso, Campinas, SP",
-          pictureUrl:
-            "https://www.portaldoanimal.org/wp-content/uploads/2018/06/Cinco-pequenas-crian%C3%A7as-salvaram-sozinhas-cachorro-abandonado-em-rua-movimentada1.jpg",
-        })
-        resolve()
-      }, 0)
-    })
+    try {
+      const response = await appAxios.get("reported-animal-details", {
+        params: {
+          latitude: coordinate.latitude,
+          longitude: coordinate.longitude,
+        },
+      })
+      setFullAnimalDetails(response.data)
+    } catch {
+      showErrorMessage(
+        "Ocorreu um erro ao tentar obter os detalhes do animal reportado"
+      )
+    }
   }
 
   useEffect(() => {

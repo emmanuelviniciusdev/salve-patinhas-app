@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from "react"
+import appAxios from "../abstractions/appAxios"
 
 const initialState = {
   animalDetails: {
@@ -38,36 +39,28 @@ export const AnimalLocationContext = createContext()
 export function AnimalLocationProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  /**
-   * TODO: Implement backend.
-   */
   async function setAnimalDetails(coordinate) {
     dispatch({ type: "SET_LAST_PRESSED_COORDINATE", payload: coordinate })
 
-    let animalDetails = {}
-
-    if (coordinate.latitude === -23.5329) {
-      animalDetails = {
-        description:
-          "Visto em frente ao Extra Abolição, aparenta estar magro e possuía uma coleira preta",
-        address: "R. da Abolição, 2013 - Pte. Preta, Campinas - SP",
-        pictureUrl:
-          "https://www.portaldoanimal.org/wp-content/uploads/2018/06/Cinco-pequenas-crian%C3%A7as-salvaram-sozinhas-cachorro-abandonado-em-rua-movimentada1.jpg",
-      }
-    } else {
-      animalDetails = {
-        description: "Cão pequeno, aparenta ter dono, estava super cuidado",
-        address:
-          "Av. Cônego Antônio Roccato, 593 - Jardim Santa Monica, Campinas - SP",
-        pictureUrl:
-          "https://static8.depositphotos.com/1004915/814/i/450/depositphotos_8141343-stock-photo-sad-dog.jpg",
-      }
-    }
-
     dispatch({ type: "SET_LOADING_ANIMAL_DETAILS", payload: true })
 
-    dispatch({ type: "SET_ANIMAL_DETAILS", payload: animalDetails })
-    dispatch({ type: "SET_LOADING_ANIMAL_DETAILS", payload: false })
+    try {
+      const response = await appAxios.get("reported-animal-details", {
+        params: {
+          latitude: coordinate.latitude,
+          longitude: coordinate.longitude,
+        },
+      })
+      dispatch({ type: "SET_ANIMAL_DETAILS", payload: response.data })
+    } catch {
+      dispatch({
+        type: "SET_ERROR_ANIMAL_DETAILS",
+        payload:
+          "Ocorreu um erro ao tentar obter os detalhes do animal reportado",
+      })
+    } finally {
+      dispatch({ type: "SET_LOADING_ANIMAL_DETAILS", payload: false })
+    }
   }
 
   function unsetAnimalDetails() {

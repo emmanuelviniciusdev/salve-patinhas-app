@@ -7,6 +7,7 @@ import * as Location from "expo-location"
 import { useAnimalLocationContext } from "../../contexts/AnimalLocationContext"
 import AppActivityIndicator from "../AppActivityIndicator"
 import { showErrorMessage, showWarningMessage } from "../../utils"
+import appAxios from "../../abstractions/appAxios"
 
 const mapViewStyles = {
   width: Dimensions.get("screen").width,
@@ -58,19 +59,13 @@ export default function ReportedAnimalsMapView() {
     }
   }
 
-  /**
-   * TODO: Implement backend.
-   */
   async function getReportedAnimalCoords() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        setReportedAnimalCoords([
-          { latitude: -23.5329, longitude: -46.6874 },
-          { latitude: -23.5229, longitude: -46.6774 },
-        ])
-        resolve()
-      }, 0)
-    })
+    try {
+      const response = await appAxios.get("reported-animals")
+      setReportedAnimalCoords(response.data)
+    } catch {
+      showErrorMessage("Erro ao tentar obter animais reportados")
+    }
   }
 
   useEffect(() => {
