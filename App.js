@@ -13,11 +13,12 @@ import {
 import AppLoading from "expo-app-loading/build/AppLoadingNativeWrapper"
 import Routes from "./routes"
 import FlashMessage from "react-native-flash-message"
+import { createMockedServer } from "./mocks"
 
 /**
  * TODO: Remove this before build application.
  */
-import "./mocks/mockSalvePatinhasAPI"
+createMockedServer()
 
 export default function App() {
   const [fontsLoaded] = useFonts({
