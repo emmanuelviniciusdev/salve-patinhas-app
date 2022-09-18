@@ -28,9 +28,6 @@ export default function ReportedAnimalDetails({ route }) {
 
   const StyledEvaArrowBackFillSvg = getStyledArrowBackIcon(EvaArrowBackFillSvg)
 
-  /**
-   * TODO: Implement backend.
-   */
   async function getFullAnimalDetails() {
     try {
       const response = await appAxios.get("reported-animal-details", {

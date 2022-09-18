@@ -7,6 +7,7 @@ import {
 import ReportedAnimalDetails from "../../../screens/ReportedAnimalDetails"
 import routeNames from "../../../routes/routeNames"
 import { Stack, TestContainer } from "../index"
+import { createMockedServerTest } from "../../../mocks"
 
 const mockedNavigationGoBack = jest.fn()
 
@@ -20,13 +21,12 @@ jest.mock("@react-navigation/native", () => {
   }
 })
 
-/**
- * TODO: Mock API requests after implement backend.
- * For this, a library like Mirage can be used: https://miragejs.com/quickstarts/react-native/development/
- */
-
 describe("ReportedAnimalDetails", () => {
+  let server
+
   beforeEach(() => {
+    server = createMockedServerTest()
+
     render(
       <TestContainer>
         <Stack.Screen
@@ -38,6 +38,10 @@ describe("ReportedAnimalDetails", () => {
     )
   })
 
+  afterEach(() => {
+    server.shutdown()
+  })
+
   it("should load the animal details", async () => {
     await waitForElementToBeRemoved(() =>
       screen.queryByTestId("AppActivityIndicator")
@@ -47,12 +51,12 @@ describe("ReportedAnimalDetails", () => {
     expect(reportedAnimalPicture).toBeTruthy()
 
     const reportedAnimalDescription = screen.queryByText(
-      "Tinha uma coleira vermelha. Bem cuidado. Parece ter algum dono!"
+      "Visto em frente ao Extra Abolição, aparenta estar magro e possuía uma coleira preta"
     )
     expect(reportedAnimalDescription).toBeTruthy()
 
     const reportedAnimalAddress = screen.queryByText(
-      "Rua Clodovaldo, Jd. Paraíso, Campinas, SP"
+      "R. da Abolição, 2013 - Pte. Preta, Campinas - SP"
     )
     expect(reportedAnimalAddress).toBeTruthy()
   })

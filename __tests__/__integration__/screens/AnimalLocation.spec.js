@@ -7,6 +7,7 @@ import {
 import { Stack, TestContainer } from "../index"
 import AnimalLocation from "../../../screens/AnimalLocation"
 import routeNames from "../../../routes/routeNames"
+import { createMockedServerTest } from "../../../mocks"
 
 jest.mock("expo-location", () => {
   const requireActual = jest.requireActual("expo-location")
@@ -22,7 +23,11 @@ jest.mock("expo-location", () => {
 })
 
 describe("AnimalLocation", () => {
+  let server
+
   beforeEach(() => {
+    server = createMockedServerTest()
+
     render(
       <TestContainer>
         <Stack.Screen
@@ -33,6 +38,10 @@ describe("AnimalLocation", () => {
     )
   })
 
+  afterEach(() => {
+    server.shutdown()
+  })
+
   it("should open animal pre-details when the user clicks on some indicator", async () => {
     await waitForElementToBeRemoved(() =>
       screen.queryByTestId("AppActivityIndicator")
@@ -41,6 +50,10 @@ describe("AnimalLocation", () => {
     const [firstSignalMarker] = screen.getAllByTestId("ReportSignalMarkerIcon")
 
     fireEvent(firstSignalMarker, "press")
+
+    await waitForElementToBeRemoved(() =>
+      screen.queryByTestId("AppActivityIndicator")
+    )
 
     expect(screen.queryByTestId("ImageAnimalPicture")).toBeTruthy()
     expect(
@@ -61,6 +74,10 @@ describe("AnimalLocation", () => {
     const [firstSignalMarker] = screen.getAllByTestId("ReportSignalMarkerIcon")
 
     fireEvent(firstSignalMarker, "press")
+
+    await waitForElementToBeRemoved(() =>
+      screen.queryByTestId("AppActivityIndicator")
+    )
 
     expect(
       screen.queryByTestId("ViewContentReportedAnimalPreDetails")
