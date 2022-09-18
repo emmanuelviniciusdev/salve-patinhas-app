@@ -9,10 +9,4 @@ global.self = global
  */
 // global.window = {}
 
-/**
- * Workaround for the warning "You called act(async () => ...) without await.".
- * https://github.com/callstack/react-native-testing-library/issues/379
- */
-global.Promise = Promise
-
 global.XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest
