@@ -41,7 +41,6 @@
     "jest-expo": "^46.0.1",
     "miragejs": "^0.1.45",
     "prettier": "2.7.1",
-    "promise-polyfill": "^8.2.3",
     "xmlhttprequest": "^1.8.0"
   },
   "private": true
