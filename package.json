@@ -7,7 +7,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest"
+    "test": "jest --testPathPattern=./__tests__/__integration__/screens"
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.2.2",
