@@ -1,10 +1,13 @@
 import AppSafeAreaView from "../../components/AppSafeAreaView"
-import AppTextInput from "../../components/AppTextInput"
+import { ViewContent } from "./styles"
+import ReportedAnimalPicture from "../../components/ReportedAnimalPicture"
 
 export default function ReportAnimal() {
   return (
     <AppSafeAreaView>
-      <AppTextInput label={"Name"} placeholder={"Type your name"} />
+      <ViewContent>
+        <ReportedAnimalPicture />
+      </ViewContent>
     </AppSafeAreaView>
   )
 }
