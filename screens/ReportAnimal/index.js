@@ -1,10 +1,10 @@
 import AppSafeAreaView from "../../components/AppSafeAreaView"
-import { Text } from "react-native"
+import AppTextInput from "../../components/AppTextInput"
 
 export default function ReportAnimal() {
   return (
     <AppSafeAreaView>
-      <Text>ReportAnimal</Text>
+      <AppTextInput label={"Name"} placeholder={"Type your name"} />
     </AppSafeAreaView>
   )
 }
