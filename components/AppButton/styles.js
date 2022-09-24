@@ -59,14 +59,17 @@ export function getStyledAppActivityIndicator(styleVariant) {
   })``
 }
 
+export function getStyledPressable(fullwidth) {
+  return styled.Pressable`
+    width: ${fullwidth ? "100%" : "auto"};
+    border-radius: 5px;
+    border: solid 2px
+      ${(props) => styleVariantsThemes[props.styleVariant].borderColor};
+  `
+}
+
 export const WrapperIcon = styled.View`
   margin-right: 10px;
-`
-
-export const Pressable = styled.Pressable`
-  border-radius: 5px;
-  border: solid 2px
-    ${(props) => styleVariantsThemes[props.styleVariant].borderColor};
 `
 
 export const Text = styled.Text`

@@ -20,7 +20,6 @@ export const StyledImage = styled.Image`
   width: 100%;
   height: 240px;
   border-radius: 5px;
-  margin-bottom: 35px;
 `
 
 export const PressableStyledImage = styled.Pressable`

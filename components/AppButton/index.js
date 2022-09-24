@@ -2,18 +2,19 @@ import {
   getLinearGradientContainer,
   getStyledAppActivityIndicator,
   getStyledIcon,
-  Pressable,
+  getStyledPressable,
   Text,
   WrapperIcon,
 } from "./styles"
-import mdiPawSvg from "../../assets/icons/mdi_paw.svg"
+import MdiPawSvg from "../../assets/icons/mdi_paw.svg"
 
 export default function AppButton({
   styleVariant = "default",
-  Icon = mdiPawSvg,
+  Icon = MdiPawSvg,
   text = "text",
   disabled = false,
   loading = false,
+  fullwidth = false,
 }) {
   if (disabled) {
     styleVariant += "-disabled"
@@ -25,8 +26,10 @@ export default function AppButton({
 
   const StyledIcon = getStyledIcon(Icon, styleVariant)
 
+  const StyledPressable = getStyledPressable(fullwidth)
+
   return (
-    <Pressable styleVariant={styleVariant} disabled={disabled}>
+    <StyledPressable styleVariant={styleVariant} disabled={disabled}>
       <LinearGradientContainer>
         <WrapperIcon>
           {loading && <StyledAppActivityIndicator />}
@@ -34,6 +37,6 @@ export default function AppButton({
         </WrapperIcon>
         <Text styleVariant={styleVariant}>{text}</Text>
       </LinearGradientContainer>
-    </Pressable>
+    </StyledPressable>
   )
 }
