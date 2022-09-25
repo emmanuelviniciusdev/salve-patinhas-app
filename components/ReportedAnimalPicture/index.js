@@ -8,7 +8,7 @@ import RiCameraOffLineSvg from "../../assets/icons/ri_camera-off-line.svg"
 import { useState } from "react"
 import ImageView from "react-native-image-viewing"
 
-export default function ReportedAnimalPicture({ imageUrl }) {
+export default function ReportedAnimalPicture({ imageUri }) {
   const [showImageView, setShowImageView] = useState(false)
 
   const StyledRiCameraOffLineSvg = getStyledCameraOffLineSvg(RiCameraOffLineSvg)
@@ -16,14 +16,14 @@ export default function ReportedAnimalPicture({ imageUrl }) {
   return (
     <>
       <ViewContent>
-        {!imageUrl && <StyledRiCameraOffLineSvg />}
-        {imageUrl && (
+        {!imageUri && <StyledRiCameraOffLineSvg />}
+        {imageUri && (
           <>
             <ImageView
               imageIndex={0}
               images={[
                 {
-                  uri: imageUrl,
+                  uri: imageUri,
                 },
               ]}
               visible={showImageView}
@@ -32,7 +32,7 @@ export default function ReportedAnimalPicture({ imageUrl }) {
             />
             <PressableStyledImage onPress={() => setShowImageView(true)}>
               <StyledImage
-                source={{ uri: imageUrl }}
+                source={{ uri: imageUri }}
                 testID={"ImageReportedAnimalPicture"}
               />
             </PressableStyledImage>

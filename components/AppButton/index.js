@@ -9,6 +9,7 @@ import {
 import MdiPawSvg from "../../assets/icons/mdi_paw.svg"
 
 export default function AppButton({
+  onPress,
   styleVariant = "default",
   Icon = MdiPawSvg,
   text = "text",
@@ -29,7 +30,11 @@ export default function AppButton({
   const StyledPressable = getStyledPressable(fullwidth)
 
   return (
-    <StyledPressable styleVariant={styleVariant} disabled={disabled}>
+    <StyledPressable
+      onPress={onPress}
+      styleVariant={styleVariant}
+      disabled={disabled}
+    >
       <LinearGradientContainer>
         <WrapperIcon>
           {loading && <StyledAppActivityIndicator />}

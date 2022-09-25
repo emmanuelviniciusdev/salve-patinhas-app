@@ -6,7 +6,7 @@ export const ViewReportedAnimalPreDetails = styled.View`
 `
 
 export const ViewReportButton = styled.View`
-  width: 380px;
+  width: 360px;
   position: absolute;
   bottom: 140px;
   align-items: flex-end;
