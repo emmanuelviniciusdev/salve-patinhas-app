@@ -5,6 +5,21 @@ import { showMessage } from "react-native-flash-message"
  * @param {string} description
  * @returns {void}
  */
+export function showSuccessMessage(message, description = "") {
+  showMessage({
+    message,
+    description,
+    type: "success",
+    autoHide: false,
+    hideStatusBar: true,
+  })
+}
+
+/**
+ * @param {string} message
+ * @param {string} description
+ * @returns {void}
+ */
 export function showWarningMessage(message, description = "") {
   showMessage({
     message,

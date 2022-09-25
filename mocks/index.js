@@ -9,6 +9,8 @@ export function createMockedServer(environment = "development") {
     routes() {
       this.urlPrefix = env.SALVE_PATINHAS_API
 
+      this.post("report-animal", () => {})
+
       this.get(`reported-animals`, () => {
         return [
           { latitude: -23.5329, longitude: -46.6874 },

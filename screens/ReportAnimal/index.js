@@ -22,7 +22,11 @@ import { useNavigation } from "@react-navigation/native"
 import { useState } from "react"
 import CameraTakePicture from "../../components/CameraTakePicture"
 import appAxios from "../../abstractions/appAxios"
-import { showErrorMessage, showWarningMessage } from "../../utils"
+import {
+  showErrorMessage,
+  showSuccessMessage,
+  showWarningMessage,
+} from "../../utils"
 import useCurrentPosition from "../../hooks/useCurrentPosition"
 
 export default function ReportAnimal() {
@@ -71,6 +75,8 @@ export default function ReportAnimal() {
 
     try {
       await appAxios.post("report-animal", payload)
+      showSuccessMessage("Parabéns!", "Animal reportado com sucesso")
+      navigation.goBack()
     } catch {
       showErrorMessage("Ocorreu um erro ao reportar o animal")
     } finally {
