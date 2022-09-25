@@ -35,6 +35,9 @@ export default function ReportedAnimalsMapView() {
       longitude: -41.9536442,
     }
 
+    /**
+     * TODO: Refactor this flow to use "useCurrentLocation" hook.
+     */
     try {
       const { granted } = await Location.requestForegroundPermissionsAsync()
 

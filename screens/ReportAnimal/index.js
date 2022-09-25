@@ -21,15 +21,20 @@ import EvaArrowBackFillSvg from "../../assets/icons/eva_arrow-back-fill.svg"
 import { useNavigation } from "@react-navigation/native"
 import { useState } from "react"
 import CameraTakePicture from "../../components/CameraTakePicture"
+import appAxios from "../../abstractions/appAxios"
+import { showErrorMessage, showWarningMessage } from "../../utils"
+import useCurrentPosition from "../../hooks/useCurrentPosition"
 
 export default function ReportAnimal() {
   const [reportedAnimalDescription, setReportedAnimalDescription] = useState()
 
-  const [pictureData, setPictureData] = useState()
-
   const [isCameraOpened, setIsCameraOpened] = useState(false)
 
-  const [reportedAnimalPictureUri, setReportedAnimalPictureUri] = useState()
+  const [isReportAnimalLoading, setIsReportAnimalLoading] = useState(false)
+
+  const [reportedAnimalPictureURI, setReportedAnimalPictureURI] = useState()
+
+  const [locationPermissionsGranted, currentPosition] = useCurrentPosition(true)
 
   const navigation = useNavigation()
 
@@ -37,12 +42,40 @@ export default function ReportAnimal() {
 
   const StyledEvaArrowBackFillSvg = getStyledArrowBackIcon(EvaArrowBackFillSvg)
 
-  function handleTakePicture(pictureData) {
-    const pictureBase64Uri = `data:image/jpg;base64,${pictureData.base64}`
+  function handleTakePicture(data) {
+    const pictureBase64URI = `data:image/jpg;base64,${data.base64}`
 
-    setPictureData(pictureData)
     setIsCameraOpened(false)
-    setReportedAnimalPictureUri(pictureBase64Uri)
+    setReportedAnimalPictureURI(pictureBase64URI)
+  }
+
+  async function reportAnimal() {
+    if (!locationPermissionsGranted) {
+      showWarningMessage(
+        "Não foi possível obter sua localização atual",
+        "Você precisa fornecer as permissões necessárias"
+      )
+      return
+    }
+
+    const payload = {
+      coordinates: {
+        latitude: currentPosition.coords.latitude,
+        longitude: currentPosition.coords.longitude,
+      },
+      description: reportedAnimalDescription,
+      pictureBase64URI: reportedAnimalPictureURI,
+    }
+
+    setIsReportAnimalLoading(true)
+
+    try {
+      await appAxios.post("report-animal", payload)
+    } catch {
+      showErrorMessage("Ocorreu um erro ao reportar o animal")
+    } finally {
+      setIsReportAnimalLoading(false)
+    }
   }
 
   return (
@@ -59,13 +92,14 @@ export default function ReportAnimal() {
             <StyledEvaArrowBackFillSvg />
           </PressableArrowBack>
           <StyledScrollView>
-            <ReportedAnimalPicture imageUri={reportedAnimalPictureUri} />
+            <ReportedAnimalPicture imageUri={reportedAnimalPictureURI} />
             <ViewMarginTop10>
               <AppButton
                 Icon={MdiCameraSvg}
                 text={"tirar uma foto"}
                 fullwidth
                 onPress={() => setIsCameraOpened(true)}
+                disabled={isReportAnimalLoading}
               />
             </ViewMarginTop10>
             <ViewMarginTop20>
@@ -84,6 +118,7 @@ export default function ReportAnimal() {
                 label={"Descrição"}
                 placeholder={"Dê detalhes sobre o animal avistado"}
                 isTextarea
+                onChangeText={setReportedAnimalDescription}
               />
             </ViewMarginTop20>
             <ViewMarginTop20>
@@ -92,6 +127,9 @@ export default function ReportAnimal() {
                 Icon={MdiExclamationThick}
                 text={"reportar"}
                 fullwidth
+                onPress={reportAnimal}
+                loading={isReportAnimalLoading}
+                disabled={isReportAnimalLoading}
               />
             </ViewMarginTop20>
           </StyledScrollView>

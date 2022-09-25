@@ -1,23 +1,5 @@
 import styled from "styled-components/native"
 import { RFValue } from "react-native-responsive-fontsize"
-import { darkTheme, lightTheme } from "../../styles/themes"
-
-export function getStyledTextInput(colorScheme, isTextarea, textareaHeight) {
-  const styleAttrs = {
-    placeholderTextColor:
-      colorScheme === "light"
-        ? lightTheme.inputPlaceholderTextColor
-        : darkTheme.inputPlaceholderTextColor,
-  }
-
-  return styled.TextInput.attrs({ ...styleAttrs })`
-    width: 100%;
-    font-family: "Nunito_400Regular";
-    font-size: ${RFValue(16)}px;
-    color: ${(props) => props.theme.color};
-    height: ${isTextarea ? `${textareaHeight}px` : "auto"};
-  `
-}
 
 export const ViewContent = styled.View`
   width: 100%;
