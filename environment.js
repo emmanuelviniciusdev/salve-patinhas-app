@@ -1,4 +1,5 @@
-import environtmentDEV from "./environment.dev"
-import environtmentPRD from "./environment.prd"
-
-export default __DEV__ ? environtmentDEV : environtmentPRD
+export default {
+  SALVE_PATINHAS_API: "http://localhost:8080",
+  GOOGLE_MAPS_API: "",
+  GOOGLE_API_KEY: "",
+}
