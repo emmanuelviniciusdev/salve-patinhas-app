@@ -16,4 +16,4 @@ web-build/
 # WebStorm
 .idea/
 
-environment.js
+environmentVariables.js
