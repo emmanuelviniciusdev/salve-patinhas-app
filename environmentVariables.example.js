@@ -1,5 +1,5 @@
 export default {
   SALVE_PATINHAS_API: "",
   GOOGLE_MAPS_API: "",
-  GOOGLE_API_KEY: "",
+  GOOGLE_MAPS_GEOCODING_API_KEY: "",
 }
