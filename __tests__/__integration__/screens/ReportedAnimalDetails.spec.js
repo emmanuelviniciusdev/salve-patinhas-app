@@ -8,18 +8,13 @@ import ReportedAnimalDetails from "../../../screens/ReportedAnimalDetails"
 import routeNames from "../../../routes/routeNames"
 import { Stack, TestContainer } from "../index"
 import { createMockedServerTest } from "../../../mocks"
+import * as useNavigation from "../../../hooks/useNavigation"
 
 const mockedNavigationGoBack = jest.fn()
 
-jest.mock("@react-navigation/native", () => {
-  const requireActual = jest.requireActual("@react-navigation/native")
-  return {
-    ...requireActual,
-    useNavigation: () => ({
-      goBack: mockedNavigationGoBack,
-    }),
-  }
-})
+jest
+  .spyOn(useNavigation, "default")
+  .mockReturnValue({ goBack: mockedNavigationGoBack })
 
 describe("ReportedAnimalDetails", () => {
   let server

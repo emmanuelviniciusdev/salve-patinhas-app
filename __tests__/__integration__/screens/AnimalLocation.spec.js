@@ -9,18 +9,19 @@ import AnimalLocation from "../../../screens/AnimalLocation"
 import routeNames from "../../../routes/routeNames"
 import { createMockedServerTest } from "../../../mocks"
 
-jest.mock("expo-location", () => {
-  const requireActual = jest.requireActual("expo-location")
-  return {
-    ...requireActual,
-    requestForegroundPermissionsAsync: async () => ({
-      granted: true,
-    }),
-    getCurrentPositionAsync: async () => ({
-      coords: { latitude: -18.8591751, longitude: -41.9536442 },
-    }),
-  }
-})
+const jestRequireActualExpoLocation = jest.requireActual("expo-location")
+
+jest
+  .spyOn(jestRequireActualExpoLocation, "requestForegroundPermissionsAsync")
+  .mockReturnValue(async () => ({
+    granted: true,
+  }))
+
+jest
+  .spyOn(jestRequireActualExpoLocation, "getCurrentPositionAsync")
+  .mockReturnValue(async () => ({
+    coords: { latitude: -18.8591751, longitude: -41.9536442 },
+  }))
 
 describe("AnimalLocation", () => {
   let server
