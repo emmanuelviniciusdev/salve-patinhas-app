@@ -18,7 +18,7 @@ import MdiCameraSvg from "../../assets/icons/mdi_camera.svg"
 import MdiMapMarkerSvg from "../../assets/icons/mdi_map-marker.svg"
 import MdiExclamationThick from "../../assets/icons/mdi_exclamation-thick.svg"
 import EvaArrowBackFillSvg from "../../assets/icons/eva_arrow-back-fill.svg"
-import { useNavigation } from "@react-navigation/native"
+import useNavigation from "../../hooks/useNavigation"
 import { useEffect, useState } from "react"
 import CameraTakePicture from "../../components/CameraTakePicture"
 import appAxios from "../../abstractions/appAxios"
@@ -143,6 +143,7 @@ export default function ReportAnimal() {
                 fullwidth
                 onPress={() => setIsCameraOpened(true)}
                 disabled={isReportAnimalLoading}
+                testID={"AppButtonOpenTakePicture"}
               />
             </ViewMarginTop10>
             <ViewMarginTop20>
@@ -154,7 +155,6 @@ export default function ReportAnimal() {
               </ViewAdressContent>
             </ViewMarginTop20>
             <ViewMarginTop20>
-              {/* TODO: Implement character counter. */}
               <AppTextInput
                 label={"Descrição"}
                 placeholder={"Dê detalhes sobre o animal avistado"}

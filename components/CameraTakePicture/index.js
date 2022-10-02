@@ -1,5 +1,5 @@
 import { Camera, requestCameraPermissionsAsync } from "expo-camera"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import {
   PressableTakePicture,
   TextWarningMessage,
@@ -31,7 +31,7 @@ export default function CameraTakePicture({ onTakePicture }) {
     }
   }
 
-  useState(() => {
+  useEffect(() => {
     ;(async () => {
       await requestCameraPermission()
     })()
@@ -49,7 +49,10 @@ export default function CameraTakePicture({ onTakePicture }) {
   return (
     <Camera style={cameraStyles} ref={cameraRef}>
       <ViewBottomContent>
-        <PressableTakePicture onPress={takePicture} />
+        <PressableTakePicture
+          testID={"PressableTakePicture"}
+          onPress={takePicture}
+        />
       </ViewBottomContent>
     </Camera>
   )

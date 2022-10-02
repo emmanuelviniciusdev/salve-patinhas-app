@@ -16,6 +16,7 @@ export default function AppButton({
   disabled = false,
   loading = false,
   fullwidth = false,
+  testID = "AppButton",
 }) {
   if (disabled) {
     styleVariant += "-disabled"
@@ -34,6 +35,7 @@ export default function AppButton({
       onPress={onPress}
       styleVariant={styleVariant}
       disabled={disabled}
+      testID={testID}
     >
       <LinearGradientContainer>
         <WrapperIcon>
