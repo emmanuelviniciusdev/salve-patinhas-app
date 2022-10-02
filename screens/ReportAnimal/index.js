@@ -19,7 +19,7 @@ import MdiMapMarkerSvg from "../../assets/icons/mdi_map-marker.svg"
 import MdiExclamationThick from "../../assets/icons/mdi_exclamation-thick.svg"
 import EvaArrowBackFillSvg from "../../assets/icons/eva_arrow-back-fill.svg"
 import { useNavigation } from "@react-navigation/native"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import CameraTakePicture from "../../components/CameraTakePicture"
 import appAxios from "../../abstractions/appAxios"
 import {
@@ -28,6 +28,8 @@ import {
   showWarningMessage,
 } from "../../utils"
 import useCurrentPosition from "../../hooks/useCurrentPosition"
+import { getAddressByCoordinates } from "../../services/GoogleMaps"
+import AppActivityIndicator from "../../components/AppActivityIndicator"
 
 export default function ReportAnimal() {
   const [reportedAnimalDescription, setReportedAnimalDescription] = useState()
@@ -38,6 +40,8 @@ export default function ReportAnimal() {
 
   const [reportedAnimalPictureURI, setReportedAnimalPictureURI] = useState()
 
+  const [currentUserAddress, setCurrentUserAddress] = useState()
+
   const [locationPermissionsGranted, currentPosition] = useCurrentPosition(true)
 
   const navigation = useNavigation()
@@ -45,6 +49,8 @@ export default function ReportAnimal() {
   const StyledMdiMapMarkerSvg = getStyledMdiMapMarkerSvg(MdiMapMarkerSvg)
 
   const StyledEvaArrowBackFillSvg = getStyledArrowBackIcon(EvaArrowBackFillSvg)
+
+  const loadingScreen = !currentUserAddress
 
   function handleTakePicture(data) {
     const pictureBase64URI = `data:image/jpg;base64,${data.base64}`
@@ -84,6 +90,37 @@ export default function ReportAnimal() {
     }
   }
 
+  async function setCurrentUserAddressByCoordinates(currentPosition) {
+    if (!currentPosition) {
+      return
+    }
+
+    try {
+      const address = await getAddressByCoordinates(
+        currentPosition.latitude,
+        currentPosition.longitude
+      )
+
+      setCurrentUserAddress(address)
+    } catch {
+      showErrorMessage("Ocorreu um erro ao tentar obter endereço")
+    }
+  }
+
+  useEffect(() => {
+    ;(async () => {
+      await setCurrentUserAddressByCoordinates(currentPosition)
+    })()
+  }, [currentPosition])
+
+  if (loadingScreen) {
+    return (
+      <AppSafeAreaView>
+        <AppActivityIndicator size={"large"} />
+      </AppSafeAreaView>
+    )
+  }
+
   return (
     <AppSafeAreaView>
       {isCameraOpened && (
@@ -113,9 +150,7 @@ export default function ReportAnimal() {
                 <ViewAddressIconWrapper>
                   <StyledMdiMapMarkerSvg />
                 </ViewAddressIconWrapper>
-                <TextAddress>
-                  Rua Clodovaldo, Jd. Paraíso, Campinas-SP
-                </TextAddress>
+                <TextAddress>{currentUserAddress}</TextAddress>
               </ViewAdressContent>
             </ViewMarginTop20>
             <ViewMarginTop20>
