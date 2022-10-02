@@ -160,6 +160,7 @@ export default function ReportAnimal() {
                 placeholder={"Dê detalhes sobre o animal avistado"}
                 isTextarea
                 onChangeText={setReportedAnimalDescription}
+                maxLength={200}
               />
             </ViewMarginTop20>
             <ViewMarginTop20>

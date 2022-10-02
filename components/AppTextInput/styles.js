@@ -19,3 +19,15 @@ export const ViewWrapperStyledTextInput = styled.View`
   padding: 10px;
   background-color: ${(props) => props.theme.inputBackgroundColor};
 `
+
+export const ViewWrapperTextTextCounter = styled.View`
+  width: 100%;
+  align-items: flex-end;
+`
+
+export const TextTextCounter = styled.Text`
+  font-family: "Inter_400Regular";
+  font-style: italic;
+  font-size: ${RFValue(14)}px;
+  margin-top: 5px;
+`
