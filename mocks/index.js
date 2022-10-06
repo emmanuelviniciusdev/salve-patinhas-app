@@ -7,8 +7,6 @@ export function createMockedServer(environment = "development") {
     environment,
 
     routes() {
-      this.post(`${env.SALVE_PATINHAS_API}/report-animal`, () => {})
-
       this.get(`${env.SALVE_PATINHAS_API}/reported-animals`, () => {
         return [
           { latitude: -23.5329, longitude: -46.6874 },
@@ -27,6 +25,8 @@ export function createMockedServer(environment = "development") {
           address: "R. da Abolição, 2013 - Pte. Preta, Campinas - SP",
         }
       })
+
+      this.post(`${env.SALVE_PATINHAS_API}/report-animal`, () => {})
 
       this.get(`${env.GOOGLE_MAPS_API}/maps/api/geocode/json`, () => {
         return {

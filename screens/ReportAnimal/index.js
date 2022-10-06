@@ -21,7 +21,6 @@ import EvaArrowBackFillSvg from "../../assets/icons/eva_arrow-back-fill.svg"
 import useNavigation from "../../hooks/useNavigation"
 import { useEffect, useState } from "react"
 import CameraTakePicture from "../../components/CameraTakePicture"
-import appAxios from "../../abstractions/appAxios"
 import {
   showErrorMessage,
   showSuccessMessage,
@@ -30,6 +29,7 @@ import {
 import useCurrentPosition from "../../hooks/useCurrentPosition"
 import { getAddressByCoordinates } from "../../services/GoogleMaps"
 import AppActivityIndicator from "../../components/AppActivityIndicator"
+import { postReportAnimal } from "../../services/SalvePatinhas"
 
 export default function ReportAnimal() {
   const [reportedAnimalDescription, setReportedAnimalDescription] = useState()
@@ -80,7 +80,7 @@ export default function ReportAnimal() {
     setIsReportAnimalLoading(true)
 
     try {
-      await appAxios.post("report-animal", payload)
+      await postReportAnimal(payload)
       showSuccessMessage("Parabéns!", "Animal reportado com sucesso")
       navigation.goBack()
     } catch {
@@ -161,10 +161,12 @@ export default function ReportAnimal() {
                 isTextarea
                 onChangeText={setReportedAnimalDescription}
                 maxLength={200}
+                testID={"AppTextInputReportedAnimalDescription"}
               />
             </ViewMarginTop20>
             <ViewMarginTop20>
               <AppButton
+                testID={"AppButtonReportAnimal"}
                 styleVariant={"primary"}
                 Icon={MdiExclamationThick}
                 text={"reportar"}

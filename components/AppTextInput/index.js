@@ -16,6 +16,7 @@ export default function AppTextInput({
   hideTextCounter = false,
   isTextarea = false,
   textareaHeight = 150,
+  testID = "AppTextInput",
 }) {
   const [inputedText, setInputedText] = useState("")
 
@@ -30,6 +31,7 @@ export default function AppTextInput({
       {label && <TextLabel>{label}</TextLabel>}
       <ViewWrapperStyledTextInput>
         <CustomTextInput
+          testID={testID}
           isTextarea={isTextarea}
           textareaHeight={textareaHeight}
           placeholder={placeholder}
