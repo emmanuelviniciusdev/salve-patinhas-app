@@ -25,7 +25,6 @@ export const ViewContent = styled.View`
   padding: 15px;
   flex-direction: row;
   justify-content: center;
-  width: 360px;
 `
 
 export const PressableIcon = styled.Pressable`

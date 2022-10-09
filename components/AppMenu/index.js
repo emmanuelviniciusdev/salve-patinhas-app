@@ -7,10 +7,10 @@ import {
   ViewContentPressableIcon,
   ViewWrapperAppMenu,
 } from "./styles"
-import MdiPawSvg from "../../assets/icons/mdi_paw.svg"
 import GisSearchPoiSvg from "../../assets/icons/gis_search-poi.svg"
-import HeroiconsSolidDotsHorizontal from "../../assets/icons/heroicons_solid-dots-horizontal.svg"
-import MdiAccount from "../../assets/icons/mdi_account.svg"
+import HeroiconsSolidDotsHorizontalSvg from "../../assets/icons/heroicons_solid-dots-horizontal.svg"
+import MdiHandHeartSvg from "../../assets/icons/mdi_hand-heart.svg"
+import MdiHomeHeartSvg from "../../assets/icons/mdi_home-heart.svg"
 import routeNames from "../../routes/routeNames"
 import { useColorScheme } from "react-native"
 import { useNavigation } from "@react-navigation/native"
@@ -64,19 +64,19 @@ export default function AppMenu({ currentRouteName }) {
             currentRouteName={currentRouteName}
           />
           <PressableMenu
-            Icon={MdiPawSvg}
+            Icon={MdiHomeHeartSvg}
             textIcon={"adotar"}
             routeName={routeNames.ANIMAL_ADOPTION}
             currentRouteName={currentRouteName}
           />
           <PressableMenu
-            Icon={MdiAccount}
-            textIcon={"conta"}
+            Icon={MdiHandHeartSvg}
+            textIcon={"dar para adoção"}
             routeName={routeNames.USER_ACCOUNT}
             currentRouteName={currentRouteName}
           />
           <PressableMenu
-            Icon={HeroiconsSolidDotsHorizontal}
+            Icon={HeroiconsSolidDotsHorizontalSvg}
             textIcon={""}
             routeName={routeNames.MENU_MORE_OPTIONS}
             currentRouteName={currentRouteName}
