@@ -26,7 +26,7 @@ export const StyledScrollView = styled.ScrollView`
 export const ViewContent = styled.View`
   width: 95%;
   max-width: 380px;
-  height: 80%;
+  height: 90%;
 `
 
 export const PressableArrowBack = styled.Pressable`

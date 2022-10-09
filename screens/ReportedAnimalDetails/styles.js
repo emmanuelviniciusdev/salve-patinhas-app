@@ -13,7 +13,7 @@ export function getStyledArrowBackIcon(icon) {
 export const ViewContent = styled.View`
   width: 95%;
   max-width: 380px;
-  height: 570px;
+  height: 90%;
 `
 
 export const PressableArrowBack = styled.Pressable`

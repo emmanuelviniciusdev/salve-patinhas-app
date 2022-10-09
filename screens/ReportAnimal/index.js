@@ -128,13 +128,13 @@ export default function ReportAnimal() {
       )}
       {!isCameraOpened && (
         <ViewContent>
-          <PressableArrowBack
-            onPress={() => navigation.goBack()}
-            testID={"navigateBackButton"}
-          >
-            <StyledEvaArrowBackFillSvg />
-          </PressableArrowBack>
           <StyledScrollView>
+            <PressableArrowBack
+              onPress={() => navigation.goBack()}
+              testID={"navigateBackButton"}
+            >
+              <StyledEvaArrowBackFillSvg />
+            </PressableArrowBack>
             <ReportedAnimalPicture imageUri={reportedAnimalPictureURI} />
             <ViewMarginTop10>
               <AppButton

@@ -70,13 +70,13 @@ export default function ReportedAnimalDetails({ route }) {
         testID={"ImageViewAnimalPicture"}
       />
       <ViewContent>
-        <PressableArrowBack
-          onPress={() => navigation.goBack()}
-          testID={"navigateBackButton"}
-        >
-          <StyledEvaArrowBackFillSvg />
-        </PressableArrowBack>
         <ScrollView>
+          <PressableArrowBack
+            onPress={() => navigation.goBack()}
+            testID={"navigateBackButton"}
+          >
+            <StyledEvaArrowBackFillSvg />
+          </PressableArrowBack>
           <Pressable onPress={() => setShowImageView(true)}>
             <ImageAnimalPicture
               source={{
