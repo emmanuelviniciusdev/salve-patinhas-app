@@ -66,7 +66,7 @@ export default function AppMenu({ currentRouteName }) {
           <PressableMenu
             Icon={MdiHomeHeartSvg}
             textIcon={"adotar"}
-            routeName={routeNames.ANIMAL_ADOPTION}
+            routeName={routeNames.ANIMAL_ADOPTION_LIST}
             currentRouteName={currentRouteName}
           />
           <PressableMenu

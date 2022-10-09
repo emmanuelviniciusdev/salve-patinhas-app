@@ -15,6 +15,7 @@ export default function AppButton({
   text = "text",
   disabled = false,
   loading = false,
+  width = 0,
   fullwidth = false,
   testID = "AppButton",
 }) {
@@ -28,7 +29,7 @@ export default function AppButton({
 
   const StyledIcon = getStyledIcon(Icon, styleVariant)
 
-  const StyledPressable = getStyledPressable(fullwidth)
+  const StyledPressable = getStyledPressable(width, fullwidth)
 
   return (
     <StyledPressable

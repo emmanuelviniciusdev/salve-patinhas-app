@@ -17,7 +17,7 @@ export const ViewWrapperStyledTextInput = styled.View`
   border: solid 2px #000;
   border-radius: 5px;
   padding: 10px;
-  background-color: ${(props) => props.theme.inputBackgroundColor};
+  background-color: ${(props) => props.theme.secondaryBackgroundColor};
 `
 
 export const ViewWrapperTextTextCounter = styled.View`

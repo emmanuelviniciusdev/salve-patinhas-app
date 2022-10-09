@@ -59,9 +59,13 @@ export function getStyledAppActivityIndicator(styleVariant) {
   })``
 }
 
-export function getStyledPressable(fullwidth) {
+export function getStyledPressable(specifiedWidth, fullwidth) {
+  specifiedWidth = specifiedWidth ? `${specifiedWidth}px` : "auto"
+
+  const width = fullwidth ? "100%" : specifiedWidth
+
   return styled.Pressable`
-    width: ${fullwidth ? "100%" : "auto"};
+    width: ${width};
     border-radius: 5px;
     border: solid 2px
       ${(props) => styleVariantsThemes[props.styleVariant].borderColor};
