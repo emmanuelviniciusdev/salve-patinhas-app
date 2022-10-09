@@ -6,6 +6,21 @@ const customAxios = axios.create({
   headers: {},
 })
 
+export async function getAnimalsForAdoption(currentPosition, total) {
+  try {
+    const response = await customAxios.get("animals-for-adoption", {
+      params: { currentPosition, total },
+    })
+
+    return response.data
+  } catch (e) {
+    console.error(e)
+    throw new Error(
+      "Ocorreu um erro ao tentar obter lista de animais para adoção"
+    )
+  }
+}
+
 export async function postReportAnimal(data) {
   try {
     await customAxios.post("report-animal", data)

@@ -3,7 +3,6 @@ import { RFValue } from "react-native-responsive-fontsize"
 
 export const ViewCard = styled.View`
   width: 100%;
-  max-width: 360px;
   background-color: ${(props) => props.theme.secondaryBackgroundColor};
   padding: 10px;
   border: solid 2px #000;
@@ -30,9 +29,11 @@ export const ViewWrapperInformation = styled.View`
 export const TextTitle = styled.Text`
   font-family: "Nunito_700Bold";
   font-size: ${RFValue(20)}px;
+  color: ${(props) => props.theme.color};
 `
 
 export const TextSubtitle = styled.Text`
   font-family: "Nunito_400Regular";
   font-size: ${RFValue(18)}px;
+  color: ${(props) => props.theme.color};
 `

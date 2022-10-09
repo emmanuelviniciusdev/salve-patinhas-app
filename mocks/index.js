@@ -28,6 +28,35 @@ export function createMockedServer(environment = "development") {
 
       this.post(`${env.SALVE_PATINHAS_API}/report-animal`, () => {})
 
+      this.get(
+        `${env.SALVE_PATINHAS_API}/animals-for-adoption`,
+        (_, request) => {
+          const { total } = request.queryParams
+
+          const animals = Array.from({ length: total }).map((_, index) =>
+            index % 2 === 0
+              ? {
+                  name: "Tobias",
+                  pictureUrl:
+                    "https://www.zooplus.ie/magazine/wp-content/uploads/2018/06/rough-collie-ie.jpg",
+                  dateOfBirth: "2022-01-01",
+                  city: "São Paulo",
+                  state: "SP",
+                }
+              : {
+                  name: "Lola",
+                  pictureUrl:
+                    "https://grapee.jp/en/wp-content/uploads/74311_main1.jpg",
+                  dateOfBirth: "2016-08-25",
+                  city: "Campinas",
+                  state: "SP",
+                }
+          )
+
+          return animals
+        }
+      )
+
       this.get(`${env.GOOGLE_MAPS_API}/maps/api/geocode/json`, () => {
         return {
           status: "OK",

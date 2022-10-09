@@ -6,13 +6,68 @@ import MdiFilterSvg from "../../assets/icons/mdi_filter.svg"
 import MdiReloadSvg from "../../assets/icons/mdi_reload.svg"
 import { ViewMarginTop10, ViewMarginTop20, ViewMarginY20 } from "./styles"
 import CardAnimalDetails from "../../components/CardAnimalDetails"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import FiltersAnimalAdoptionList from "../../components/FiltersAnimalAdoptionList"
+import { getAnimalsForAdoption } from "../../services/SalvePatinhas"
+import { showErrorMessage } from "../../utils"
+import AppActivityIndicator from "../../components/AppActivityIndicator"
 
 export default function AnimalAdoptionList() {
   const [showFilters, setShowFilters] = useState(false)
 
+  const [currentPositionAnimalsList, setCurrentPositionAnimalsList] =
+    useState(0)
+
+  const [firstLoadingAnimalsList, setFirstLoadingAnimalsList] = useState(false)
+
+  const [loadingAnimalsList, setLoadingAnimalsList] = useState(false)
+
+  const [animalsList, setAnimalsList] = useState([])
+
   const showList = !showFilters
+
+  async function getAnimalsList(total = 30, isFirstLoading = false) {
+    if (isFirstLoading) {
+      setFirstLoadingAnimalsList(true)
+    }
+
+    setLoadingAnimalsList(true)
+
+    try {
+      const animals = await getAnimalsForAdoption(
+        currentPositionAnimalsList,
+        total
+      )
+
+      setAnimalsList((value) => [...value, ...animals])
+
+      setCurrentPositionAnimalsList((value) => value + total)
+    } catch {
+      showErrorMessage(
+        "Ocorreu um erro ao tentar obter lista de animais para adoção"
+      )
+    } finally {
+      if (isFirstLoading) {
+        setFirstLoadingAnimalsList(false)
+      }
+
+      setLoadingAnimalsList(false)
+    }
+  }
+
+  useEffect(() => {
+    ;(async () => {
+      await getAnimalsList(30, true)
+    })()
+  }, [])
+
+  if (firstLoadingAnimalsList) {
+    return (
+      <AppSafeAreaView>
+        <AppActivityIndicator size={"large"} />
+      </AppSafeAreaView>
+    )
+  }
 
   return (
     <AppSafeAreaView>
@@ -34,15 +89,26 @@ export default function AnimalAdoptionList() {
               />
             </ViewMarginTop20>
             <ViewMarginTop20>
-              <ViewMarginTop10>
-                <CardAnimalDetails />
-              </ViewMarginTop10>
+              {animalsList.map((animal, index) => (
+                <ViewMarginTop10 key={index}>
+                  <CardAnimalDetails
+                    name={animal.name}
+                    dateOfBirth={animal.dateOfBirth}
+                    city={animal.city}
+                    state={animal.state}
+                    pictureUrl={animal.pictureUrl}
+                  />
+                </ViewMarginTop10>
+              ))}
             </ViewMarginTop20>
             <ViewMarginY20>
               <AppButton
                 styleVariant={"secondary"}
                 Icon={MdiReloadSvg}
                 text={"carregar mais"}
+                disabled={loadingAnimalsList}
+                loading={loadingAnimalsList}
+                onPress={() => getAnimalsList(30)}
               />
             </ViewMarginY20>
           </>
