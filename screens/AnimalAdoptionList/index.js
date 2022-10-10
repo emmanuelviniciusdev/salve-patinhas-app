@@ -109,6 +109,7 @@ export default function AnimalAdoptionList() {
                 disabled={loadingAnimalsList}
                 loading={loadingAnimalsList}
                 onPress={() => getAnimalsList(30)}
+                testID={"AppButtonLoadMoreAnimals"}
               />
             </ViewMarginY20>
           </>

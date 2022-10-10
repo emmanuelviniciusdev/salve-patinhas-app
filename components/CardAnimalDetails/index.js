@@ -50,7 +50,7 @@ export default function CardAnimalDetails({
   })
 
   return (
-    <ViewCard>
+    <ViewCard testID={"CardAnimalDetails"}>
       <ImageAnimalPicture source={{ uri: pictureUrl }} />
       <ViewWrapperInformationAndAction>
         <ViewWrapperInformation>
