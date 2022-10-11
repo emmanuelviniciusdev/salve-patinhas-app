@@ -7,6 +7,7 @@ import {
   WrapperIcon,
 } from "./styles"
 import MdiPawSvg from "../../assets/icons/mdi_paw.svg"
+import { View } from "react-native"
 
 export default function AppButton({
   onPress,
@@ -18,6 +19,7 @@ export default function AppButton({
   width = 0,
   fullwidth = false,
   testID = "AppButton",
+  testIDLoadingIcon = "AppButtonLoadingIcon",
 }) {
   if (disabled) {
     styleVariant += "-disabled"
@@ -40,7 +42,11 @@ export default function AppButton({
     >
       <LinearGradientContainer>
         <WrapperIcon>
-          {loading && <StyledAppActivityIndicator />}
+          {loading && (
+            <View testID={testIDLoadingIcon}>
+              <StyledAppActivityIndicator />
+            </View>
+          )}
           {!loading && <StyledIcon width={24} height={24} />}
         </WrapperIcon>
         <Text styleVariant={styleVariant}>{text}</Text>

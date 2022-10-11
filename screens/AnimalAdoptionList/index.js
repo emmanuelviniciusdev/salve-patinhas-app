@@ -39,9 +39,8 @@ export default function AnimalAdoptionList() {
         total
       )
 
-      setAnimalsList((value) => [...value, ...animals])
-
-      setCurrentPositionAnimalsList((value) => value + total)
+      setAnimalsList([...animalsList, ...animals])
+      setCurrentPositionAnimalsList(currentPositionAnimalsList + total)
     } catch {
       showErrorMessage(
         "Ocorreu um erro ao tentar obter lista de animais para adoção"
@@ -108,7 +107,7 @@ export default function AnimalAdoptionList() {
                 text={"carregar mais"}
                 disabled={loadingAnimalsList}
                 loading={loadingAnimalsList}
-                onPress={() => getAnimalsList(30)}
+                onPress={async () => await getAnimalsList(30)}
                 testID={"AppButtonLoadMoreAnimals"}
               />
             </ViewMarginY20>
