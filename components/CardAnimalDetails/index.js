@@ -7,11 +7,11 @@ import {
   ViewWrapperInformationAndAction,
 } from "./styles"
 import AppButton from "../AppButton"
-import collie1Jpg from "../../assets/images/collie-1.jpg"
 import MdiHeartSvg from "../../assets/icons/mdi_heart.svg"
 import MdiTrashCanSvg from "../../assets/icons/mdi_trash-can.svg"
 import moment from "moment"
-import { useEffect } from "react"
+import { useNavigation } from "@react-navigation/native"
+import routeNames from "../../routes/routeNames"
 
 /**
  *
@@ -20,6 +20,7 @@ import { useEffect } from "react"
  * @constructor
  */
 export default function CardAnimalDetails({
+  guidAnimal,
   name,
   dateOfBirth,
   city,
@@ -27,6 +28,8 @@ export default function CardAnimalDetails({
   pictureUrl,
   actionType = "openAnimalAdoptionDetails",
 }) {
+  const navigation = useNavigation()
+
   const buttonText =
     actionType === "openAnimalAdoptionDetails" ? "conhecer" : "remover"
 
@@ -45,9 +48,20 @@ export default function CardAnimalDetails({
     return differenceInMonths + (differenceInMonths > 1 ? " meses" : " mês")
   }
 
-  useEffect(() => {
-    getAnimalAge()
-  })
+  function openAnimalDetails() {
+    navigation.navigate(routeNames.ANIMAL_ADOPTION_DETAILS)
+  }
+
+  function removeAnimal() {}
+
+  function handleButtonAction() {
+    if (actionType === "openAnimalAdoptionDetails") {
+      openAnimalDetails()
+      return
+    }
+
+    removeAnimal()
+  }
 
   return (
     <ViewCard testID={"CardAnimalDetails"}>
@@ -61,7 +75,12 @@ export default function CardAnimalDetails({
             {city}, {state}
           </TextSubtitle>
         </ViewWrapperInformation>
-        <AppButton Icon={buttonIcon} text={buttonText} width={150} />
+        <AppButton
+          Icon={buttonIcon}
+          text={buttonText}
+          width={150}
+          onPress={handleButtonAction}
+        />
       </ViewWrapperInformationAndAction>
     </ViewCard>
   )
