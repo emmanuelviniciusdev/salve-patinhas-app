@@ -1,4 +1,21 @@
 import { showMessage } from "react-native-flash-message"
+import moment from "moment"
+
+/**
+ * @param dateOfBirth {string}
+ * @returns {string}
+ */
+export function getAnimalAge(dateOfBirth) {
+  const differenceInYears = moment().diff(moment(dateOfBirth), "years")
+
+  if (differenceInYears > 0) {
+    return differenceInYears + (differenceInYears > 1 ? " anos" : " ano")
+  }
+
+  const differenceInMonths = moment().diff(moment(dateOfBirth), "months")
+
+  return differenceInMonths + (differenceInMonths > 1 ? " meses" : " mês")
+}
 
 /**
  * @param {string} message

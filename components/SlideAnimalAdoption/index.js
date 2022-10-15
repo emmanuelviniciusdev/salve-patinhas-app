@@ -12,12 +12,6 @@ export default function SlideAnimalAdoption({ listPictureUrl = [] }) {
   const noPictureAvailableUrl =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1200px-No_image_3x4.svg.png"
 
-  listPictureUrl = [
-    "https://i.imgur.com/kPp9kVw.jpg",
-    "https://i.imgur.com/hzGycVD.jpg",
-    "https://i.imgur.com/RuYMljC.jpg",
-  ]
-
   const [selectedPictureUrl, setSelectedPictureUrl] = useState(
     listPictureUrl[0] ?? noPictureAvailableUrl
   )
@@ -45,11 +39,11 @@ export default function SlideAnimalAdoption({ listPictureUrl = [] }) {
       <ViewWrapperThumbnails>
         {listPictureUrl.map((pictureUrl, index) => (
           <PressableImageThumbnail
+            key={index}
             onPress={() => setSelectedPictureUrl(pictureUrl)}
           >
             <ImageThumbnail
               testID={"SlideAnimalAdoptionImageThumbnail"}
-              key={index}
               source={{ uri: pictureUrl }}
               isSelected={pictureUrl === selectedPictureUrl}
             />

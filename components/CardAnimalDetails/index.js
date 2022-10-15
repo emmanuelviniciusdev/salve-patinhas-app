@@ -9,9 +9,9 @@ import {
 import AppButton from "../AppButton"
 import MdiHeartSvg from "../../assets/icons/mdi_heart.svg"
 import MdiTrashCanSvg from "../../assets/icons/mdi_trash-can.svg"
-import moment from "moment"
 import { useNavigation } from "@react-navigation/native"
 import routeNames from "../../routes/routeNames"
+import { getAnimalAge } from "../../utils"
 
 /**
  *
@@ -36,18 +36,6 @@ export default function CardAnimalDetails({
   const buttonIcon =
     actionType === "openAnimalAdoptionDetails" ? MdiHeartSvg : MdiTrashCanSvg
 
-  function getAnimalAge() {
-    const differenceInYears = moment().diff(moment(dateOfBirth), "years")
-
-    if (differenceInYears > 0) {
-      return differenceInYears + (differenceInYears > 1 ? " anos" : " ano")
-    }
-
-    const differenceInMonths = moment().diff(moment(dateOfBirth), "months")
-
-    return differenceInMonths + (differenceInMonths > 1 ? " meses" : " mês")
-  }
-
   function openAnimalDetails() {
     navigation.navigate(routeNames.ANIMAL_ADOPTION_DETAILS)
   }
@@ -69,7 +57,7 @@ export default function CardAnimalDetails({
       <ViewWrapperInformationAndAction>
         <ViewWrapperInformation>
           <TextTitle>
-            {name}, {getAnimalAge()}
+            {name}, {getAnimalAge(dateOfBirth)}
           </TextTitle>
           <TextSubtitle>
             {city}, {state}
