@@ -78,7 +78,7 @@ describe("AnimalAdoptionRegistration", () => {
     )
 
     expect(
-      screen.getByText("Você não possui nenhum animal cadastrado para adoção")
+      screen.queryByText("Você não possui nenhum animal cadastrado para adoção")
     ).toBeTruthy()
   })
 })
