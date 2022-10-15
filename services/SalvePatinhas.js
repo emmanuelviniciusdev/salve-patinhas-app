@@ -6,6 +6,29 @@ const customAxios = axios.create({
   headers: {},
 })
 
+export async function getAnimalsForAdoptionRegisteredByUserList(guidUser) {
+  const animals = Array.from({ length: 2 }).map((_, index) =>
+    index % 2 === 0
+      ? {
+          name: "Tobias",
+          pictureUrl:
+            "https://www.zooplus.ie/magazine/wp-content/uploads/2018/06/rough-collie-ie.jpg",
+          dateOfBirth: "2022-01-01",
+          city: "São Paulo",
+          state: "SP",
+        }
+      : {
+          name: "Lola",
+          pictureUrl: "https://grapee.jp/en/wp-content/uploads/74311_main1.jpg",
+          dateOfBirth: "2016-08-25",
+          city: "Campinas",
+          state: "SP",
+        }
+  )
+
+  return { status: 200, data: animals }
+}
+
 /**
  * GET animals-for-adoption/{guid}
  *

@@ -9,6 +9,8 @@ import MenuMoreOptions from "../screens/MenuMoreOptions"
 import ReportAnimal from "../screens/ReportAnimal"
 import AnimalAdoptionList from "../screens/AnimalAdoptionList"
 import AnimalAdoptionDetails from "../screens/AnimalAdoptionDetails"
+import AnimalAdoptionRegistration from "../screens/AnimalAdoptionRegistration"
+import AnimalAdoptionRegistrationForm from "../screens/AnimalAdoptionRegistrationForm"
 
 const Stack = createNativeStackNavigator()
 
@@ -37,6 +39,14 @@ export default function Routes({ isSignedIn }) {
             <Stack.Screen
               name={routeNames.ANIMAL_ADOPTION_DETAILS}
               component={AnimalAdoptionDetails}
+            />
+            <Stack.Screen
+              name={routeNames.ANIMAL_ADOPTION_REGISTRATION}
+              component={AnimalAdoptionRegistration}
+            />
+            <Stack.Screen
+              name={routeNames.ANIMAL_ADOPTION_REGISTRATION_FORM}
+              component={AnimalAdoptionRegistrationForm}
             />
             <Stack.Screen
               name={routeNames.USER_ACCOUNT}

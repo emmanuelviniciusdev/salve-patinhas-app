@@ -72,7 +72,7 @@ export default function AppMenu({ currentRouteName }) {
           <PressableMenu
             Icon={MdiHandHeartSvg}
             textIcon={"dar para adoção"}
-            routeName={routeNames.USER_ACCOUNT}
+            routeName={routeNames.ANIMAL_ADOPTION_REGISTRATION}
             currentRouteName={currentRouteName}
           />
           <PressableMenu
