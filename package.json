@@ -43,6 +43,7 @@
     "jest-expo": "^46.0.1",
     "miragejs": "^0.1.45",
     "prettier": "2.7.1",
+    "timekeeper": "^2.2.0",
     "xmlhttprequest": "^1.8.0"
   },
   "private": true
