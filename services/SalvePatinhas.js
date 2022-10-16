@@ -6,6 +6,29 @@ const customAxios = axios.create({
   headers: {},
 })
 
+export async function postAnimalForAdoption(data) {
+  return {
+    status: 201,
+    data: {
+      listPictureUrl: [
+        "https://i.imgur.com/kPp9kVw.jpg",
+        "https://i.imgur.com/hzGycVD.jpg",
+        "https://i.imgur.com/RuYMljC.jpg",
+      ],
+      species: "cão",
+      name: "Tobias",
+      dateOfBirth: "2019-04-04",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pellentesque enim eget pulvinar maximus. Quisque rhoncus ut orci blandit condimentum.",
+      contactInformation: {
+        name: "João Vitor",
+        phone: "+5511900000000",
+        email: "joao.vitor@icloud.com",
+      },
+    },
+  }
+}
+
 export async function getAnimalsForAdoptionRegisteredByUserList(guidUser) {
   const animals = Array.from({ length: 2 }).map((_, index) =>
     index % 2 === 0

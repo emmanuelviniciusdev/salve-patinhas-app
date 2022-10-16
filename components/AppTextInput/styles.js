@@ -30,4 +30,5 @@ export const TextTextCounter = styled.Text`
   font-style: italic;
   font-size: ${RFValue(14)}px;
   margin-top: 5px;
+  color: ${(props) => props.theme.color};
 `

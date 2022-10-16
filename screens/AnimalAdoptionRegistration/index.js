@@ -9,8 +9,12 @@ import AppActivityIndicator from "../../components/AppActivityIndicator"
 import { getAnimalsForAdoptionRegisteredByUserList } from "../../services/SalvePatinhas"
 import { showErrorMessage } from "../../utils"
 import CardAnimalDetails from "../../components/CardAnimalDetails"
+import { useNavigation } from "@react-navigation/native"
+import routeNames from "../../routes/routeNames"
 
 export default function AnimalAdoptionRegistration() {
+  const navigation = useNavigation()
+
   const [loadingRegisteredAnimals, setLoadingRegisteredAnimals] = useState(true)
 
   const [registeredAnimals, setRegisteredAnimals] = useState([])
@@ -49,6 +53,9 @@ export default function AnimalAdoptionRegistration() {
             styleVariant={"primary"}
             Icon={MdiPlusBoxOutlineSvg}
             text={"cadastrar um animal"}
+            onPress={() =>
+              navigation.navigate(routeNames.ANIMAL_ADOPTION_REGISTRATION_FORM)
+            }
           />
         </ViewMarginTop30>
         <ViewMarginTop30>

@@ -13,6 +13,7 @@ export default function AppTextInput({
   placeholder,
   onChangeText,
   maxLength,
+  mask,
   hideTextCounter = false,
   isTextarea = false,
   textareaHeight = 150,
@@ -25,6 +26,8 @@ export default function AppTextInput({
   const textCounter = `${inputedTextLength}/${maxLength}`
 
   const showTextCounter = !hideTextCounter && maxLength !== undefined
+
+  const maskProps = mask ? { mask, value: inputedText } : {}
 
   return (
     <ViewContent>
@@ -41,6 +44,7 @@ export default function AppTextInput({
             setInputedText(text)
             onChangeText(text)
           }}
+          {...maskProps}
         />
       </ViewWrapperStyledTextInput>
       {showTextCounter && (

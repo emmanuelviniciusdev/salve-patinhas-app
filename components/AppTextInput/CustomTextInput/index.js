@@ -1,13 +1,17 @@
 import { TextInput, useColorScheme } from "react-native"
 import { RFValue } from "react-native-responsive-fontsize"
 import { darkTheme, lightTheme } from "../../../styles/themes"
+import MaskInput from "react-native-mask-input"
 
 export default function CustomTextInput({
   isTextarea,
   textareaHeight,
+  mask,
   ...rest
 }) {
   const systemColorScheme = useColorScheme()
+
+  const TextInputToRender = mask ? MaskInput : TextInput
 
   const color =
     systemColorScheme === "light" ? lightTheme.color : darkTheme.color
@@ -22,7 +26,7 @@ export default function CustomTextInput({
   const textAlignVertical = isTextarea ? "top" : "center"
 
   return (
-    <TextInput
+    <TextInputToRender
       style={{
         width: "100%",
         fontFamily: "Nunito_400Regular",
@@ -32,6 +36,7 @@ export default function CustomTextInput({
       }}
       placeholderTextColor={placeholderTextColor}
       textAlignVertical={textAlignVertical}
+      mask={mask}
       {...rest}
     />
   )

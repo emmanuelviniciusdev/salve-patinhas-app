@@ -17,7 +17,7 @@ import { darkTheme, lightTheme } from "../../styles/themes"
 export default function AppSelectInput({
   label,
   items = [],
-  selectedValue,
+  selectedValue = null,
   onValueChange,
   placeholder = "Selecionar...",
 }) {
@@ -45,8 +45,8 @@ export default function AppSelectInput({
           onValueChange={onValueChange}
         >
           {placeholder && <Picker.Item label={placeholder} value={null} />}
-          {items.map((item) => (
-            <Picker.Item label={item.label} value={item.value} />
+          {items.map((item, index) => (
+            <Picker.Item key={index} label={item.label} value={item.value} />
           ))}
         </Picker>
       </ViewWrapperPicker>

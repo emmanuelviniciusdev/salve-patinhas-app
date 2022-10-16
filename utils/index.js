@@ -2,6 +2,15 @@ import { showMessage } from "react-native-flash-message"
 import moment from "moment"
 
 /**
+ *
+ * @param base64 {string}
+ * @returns {string}
+ */
+export function getBase64URI(base64) {
+  return `data:image/jpeg;base64,${base64}`
+}
+
+/**
  * @param dateOfBirth {string}
  * @returns {string}
  */
