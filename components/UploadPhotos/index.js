@@ -87,7 +87,10 @@ export default function UploadPhotos({
           </ViewWrapperImage>
         ))}
         {showPressableAddImage && (
-          <PressableAddImage onPress={onPickImage}>
+          <PressableAddImage
+            testID={"UploadPhotosPressableAddImage"}
+            onPress={onPickImage}
+          >
             <StyledPressableAddImageIcon />
           </PressableAddImage>
         )}

@@ -11,6 +11,7 @@ import { darkTheme, lightTheme } from "../../styles/themes"
  * @param placeholder {string}
  * @param selectedValue {string}
  * @param onValueChange {callback}
+ * @param testID {string}
  * @returns {JSX.Element}
  * @constructor
  */
@@ -20,6 +21,7 @@ export default function AppSelectInput({
   selectedValue = null,
   onValueChange,
   placeholder = "Selecionar...",
+  testID = "AppSelectInput",
 }) {
   const systemColorScheme = useColorScheme()
 
@@ -36,6 +38,7 @@ export default function AppSelectInput({
       {label && <TextLabel>{label}</TextLabel>}
       <ViewWrapperPicker>
         <Picker
+          testID={testID}
           style={{
             fontFamily: "Nunito_400Regular",
             fontSize: RFValue(16),

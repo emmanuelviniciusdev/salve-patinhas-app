@@ -15,8 +15,8 @@ import {
   showWarningMessage,
 } from "../../utils"
 import { postAnimalForAdoption } from "../../services/SalvePatinhas"
-import { useNavigation } from "@react-navigation/native"
 import routeNames from "../../routes/routeNames"
+import useNavigation from "../../hooks/useNavigation"
 
 export default function AnimalAdoptionRegistrationForm() {
   const navigation = useNavigation()
@@ -62,7 +62,7 @@ export default function AnimalAdoptionRegistrationForm() {
     }
 
     if (animalDateOfBirth.trim() === "") {
-      throw new Error("A data de nascimento do animal é obrigatório")
+      throw new Error("A data de nascimento do animal é obrigatória")
     }
 
     if (animalSpecies.trim() === "") {
@@ -153,6 +153,7 @@ export default function AnimalAdoptionRegistrationForm() {
         </MarginTop10>
         <MarginTop10>
           <AppSelectInput
+            testID={"AppSelectInputAnimalSpecies"}
             label={"Espécie *"}
             items={itemsSpecies}
             selectedValue={animalSpecies}
@@ -193,6 +194,7 @@ export default function AnimalAdoptionRegistrationForm() {
         </MarginTop10>
         <MarginY10>
           <AppButton
+            testID={"AppButtonRegisterAnimal"}
             styleVariant={"primary"}
             Icon={MdiContentSaveSvg}
             text={"cadastrar"}
