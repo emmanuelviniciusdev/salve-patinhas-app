@@ -11,10 +11,13 @@ import AnimalAdoptionList from "../screens/AnimalAdoptionList"
 import AnimalAdoptionDetails from "../screens/AnimalAdoptionDetails"
 import AnimalAdoptionRegistration from "../screens/AnimalAdoptionRegistration"
 import AnimalAdoptionRegistrationForm from "../screens/AnimalAdoptionRegistrationForm"
+import { useAuthenticationContext } from "../contexts/AuthenticationContext"
 
 const Stack = createNativeStackNavigator()
 
-export default function Routes({ isSignedIn }) {
+export default function Routes() {
+  const { isSignedIn } = useAuthenticationContext()
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>

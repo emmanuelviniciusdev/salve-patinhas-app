@@ -6,13 +6,18 @@ import {
   Title,
   WrapperPresentation,
   WrapperAuthButtons,
+  ViewMarginTop5,
 } from "./styles"
 import imgPartialLogo from "../../assets/images/partial-logo.png"
 import humanHandsHoldingDogPawsPng from "../../assets/images/human-hands-holding-dog-paws.png"
-import googleSvg from "../../assets/icons/google.svg"
+import GoogleSvg from "../../assets/icons/google.svg"
+import MdiAppleSvg from "../../assets/icons/mdi_apple.svg"
 import AppButton from "../../components/AppButton"
+import { useAuthenticationContext } from "../../contexts/AuthenticationContext"
 
 export default function SignIn() {
+  const { login } = useAuthenticationContext()
+
   return (
     <ContainerImageBackground source={humanHandsHoldingDogPawsPng}>
       <Container>
@@ -26,7 +31,18 @@ export default function SignIn() {
           </Paragraph>
         </WrapperPresentation>
         <WrapperAuthButtons>
-          <AppButton Icon={googleSvg} text={"entrar com google"} />
+          <AppButton
+            Icon={GoogleSvg}
+            text={"entrar com google"}
+            onPress={login}
+          />
+          <ViewMarginTop5>
+            <AppButton
+              Icon={MdiAppleSvg}
+              text={"entrar com apple"}
+              onPress={login}
+            />
+          </ViewMarginTop5>
         </WrapperAuthButtons>
       </Container>
     </ContainerImageBackground>

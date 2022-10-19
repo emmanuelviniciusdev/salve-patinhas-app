@@ -1,6 +1,10 @@
 import styled from "styled-components/native"
 import { RFValue } from "react-native-responsive-fontsize"
 
+export const ViewMarginTop5 = styled.View`
+  margin-top: 5px;
+`
+
 export const ContainerImageBackground = styled.ImageBackground`
   flex: 1;
 `

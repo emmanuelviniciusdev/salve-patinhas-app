@@ -10,8 +10,11 @@ import {
 import MdiLogout from "../../assets/icons/mdi_logout.svg"
 import MdiWindowClose from "../../assets/icons/mdi_window-close.svg"
 import { useNavigation } from "@react-navigation/native"
+import { useAuthenticationContext } from "../../contexts/AuthenticationContext"
 
 export default function MenuMoreOptions() {
+  const { logout } = useAuthenticationContext()
+
   const navigation = useNavigation()
 
   const StyledMdiLogout = getStyledIcon(MdiLogout)
@@ -26,7 +29,7 @@ export default function MenuMoreOptions() {
         </Pressable>
       </ViewWrapperPressableCloseIcon>
       <ViewContent>
-        <Pressable>
+        <Pressable onPress={logout}>
           <ViewPressableMenuOptionContent>
             <StyledMdiLogout />
             <TextPressableMenuOption>encerrar sessão</TextPressableMenuOption>

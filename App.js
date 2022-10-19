@@ -14,6 +14,7 @@ import AppLoading from "expo-app-loading/build/AppLoadingNativeWrapper"
 import Routes from "./routes"
 import FlashMessage from "react-native-flash-message"
 import { createMockedServer } from "./mocks"
+import { AuthenticationProvider } from "./contexts/AuthenticationContext"
 
 /**
  * TODO: Remove this before build application.
@@ -28,8 +29,6 @@ export default function App() {
     Nunito_500Medium,
     Nunito_700Bold,
   })
-
-  const [isSignedIn] = useState(true)
 
   const [colorScheme, setColorScheme] = useState("light")
 
@@ -51,7 +50,9 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={colorScheme === "light" ? lightTheme : darkTheme}>
-        <Routes isSignedIn={isSignedIn} />
+        <AuthenticationProvider>
+          <Routes />
+        </AuthenticationProvider>
       </ThemeProvider>
 
       <StatusBar style="auto" />
