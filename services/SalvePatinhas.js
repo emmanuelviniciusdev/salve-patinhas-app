@@ -126,11 +126,4 @@ export async function getAnimalsForAdoption(currentPosition, total) {
   }
 }
 
-export async function postReportAnimal(data) {
-  try {
-    await customAxios.post("report-animal", data)
-  } catch (e) {
-    console.error(e)
-    throw new Error("Ocorreu um erro ao reportar o animal")
-  }
-}
+export async function postReportAnimal(data) {}

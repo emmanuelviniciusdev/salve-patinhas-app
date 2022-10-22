@@ -1,4 +1,3 @@
-import { createMockedServerTest } from "../../../mocks"
 import {
   fireEvent,
   render,
@@ -13,6 +12,7 @@ import * as useCurrentPosition from "../../../hooks/useCurrentPosition"
 import * as useNavigation from "../../../hooks/useNavigation"
 import CameraFromExpoCamera from "../../__mocks__/CameraFromExpoCamera"
 import * as SalvePatinhasService from "../../../services/SalvePatinhas"
+import * as GoogleMapsService from "../../../services/GoogleMaps"
 
 const mockedNavigationGoBack = jest.fn()
 
@@ -22,8 +22,6 @@ jest.mock("expo-camera", () => ({
 }))
 
 describe("ReportAnimal", () => {
-  let server
-
   beforeEach(() => {
     jest
       .spyOn(useCurrentPosition, "default")
@@ -36,22 +34,19 @@ describe("ReportAnimal", () => {
       .spyOn(useNavigation, "default")
       .mockReturnValue({ goBack: mockedNavigationGoBack })
 
-    /**
-     * Workaround to mock this POST request.
-     *
-     * For some reason, MirageJS doesn't mock POST requests in tests, and sadly I have no time to investigate this problem.
-     */
     jest.spyOn(SalvePatinhasService, "postReportAnimal").mockResolvedValue(true)
 
-    server = createMockedServerTest()
+    jest
+      .spyOn(GoogleMapsService, "getAddressByCoordinates")
+      .mockResolvedValue(
+        "R. Afonso Pena, 3713 - Centro, Gov. Valadares - MG, 35010-002, Brasil"
+      )
 
     renderScreen()
   })
 
   afterEach(() => {
     jest.resetAllMocks()
-
-    server.shutdown()
   })
 
   function renderScreen() {

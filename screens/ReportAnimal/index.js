@@ -97,8 +97,8 @@ export default function ReportAnimal() {
 
     try {
       const address = await getAddressByCoordinates(
-        currentPosition.latitude,
-        currentPosition.longitude
+        currentPosition.coords.latitude,
+        currentPosition.coords.longitude
       )
 
       setCurrentUserAddress(address)
