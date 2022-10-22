@@ -1,10 +1,40 @@
 import axios from "axios"
 import env from "../environmentVariables"
+import Timeout from "await-timeout"
 
 const customAxios = axios.create({
   baseURL: env.SALVE_PATINHAS_API,
   headers: {},
 })
+
+export async function getReportedAnimalDetails(guid) {
+  await Timeout.set(500)
+
+  return {
+    status: 200,
+    data: {
+      pictureUrl:
+        "https://www.portaldoanimal.org/wp-content/uploads/2018/06/Cinco-pequenas-crian%C3%A7as-salvaram-sozinhas-cachorro-abandonado-em-rua-movimentada1.jpg",
+      description:
+        "Visto em frente ao Extra Abolição, aparenta estar magro e possuía uma coleira preta",
+      address: "R. da Abolição, 2013 - Pte. Preta, Campinas - SP",
+    },
+  }
+}
+
+export async function getReportedAnimalsCoordsList(latitude, longitude) {
+  await Timeout.set(500)
+
+  return {
+    status: 200,
+    data: [
+      { guid: "", latitude: -23.5329, longitude: -46.6874 },
+      { guid: "", latitude: -23.539, longitude: -46.6877 },
+      { guid: "", latitude: -23.5341, longitude: -46.688 },
+      { guid: "", latitude: -23.5345, longitude: -46.6885 },
+    ],
+  }
+}
 
 export async function postAnimalForAdoption(data) {
   return {

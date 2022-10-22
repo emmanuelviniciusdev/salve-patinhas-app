@@ -7,7 +7,7 @@ import {
 import { Stack, TestContainer } from "../index"
 import AnimalLocation from "../../../screens/AnimalLocation"
 import routeNames from "../../../routes/routeNames"
-import { createMockedServerTest } from "../../../mocks"
+import * as SalvePatinhasService from "../../../services/SalvePatinhas"
 
 const jestRequireActualExpoLocation = jest.requireActual("expo-location")
 
@@ -23,12 +23,31 @@ jest
     coords: { latitude: -18.8591751, longitude: -41.9536442 },
   }))
 
+jest
+  .spyOn(SalvePatinhasService, "getReportedAnimalsCoordsList")
+  .mockResolvedValue({
+    status: 200,
+    data: [
+      { guid: "", latitude: -23.5329, longitude: -46.6874 },
+      { guid: "", latitude: -23.539, longitude: -46.6877 },
+      { guid: "", latitude: -23.5341, longitude: -46.688 },
+      { guid: "", latitude: -23.5345, longitude: -46.6885 },
+    ],
+  })
+
+jest.spyOn(SalvePatinhasService, "getReportedAnimalDetails").mockResolvedValue({
+  status: 200,
+  data: {
+    pictureUrl:
+      "https://www.portaldoanimal.org/wp-content/uploads/2018/06/Cinco-pequenas-crian%C3%A7as-salvaram-sozinhas-cachorro-abandonado-em-rua-movimentada1.jpg",
+    description:
+      "Visto em frente ao Extra Abolição, aparenta estar magro e possuía uma coleira preta",
+    address: "R. da Abolição, 2013 - Pte. Preta, Campinas - SP",
+  },
+})
+
 describe("AnimalLocation", () => {
-  let server
-
   beforeEach(() => {
-    server = createMockedServerTest()
-
     render(
       <TestContainer>
         <Stack.Screen
@@ -37,10 +56,6 @@ describe("AnimalLocation", () => {
         />
       </TestContainer>
     )
-  })
-
-  afterEach(() => {
-    server.shutdown()
   })
 
   it("should open animal pre-details when the user clicks on some indicator", async () => {

@@ -7,8 +7,8 @@ import {
 import ReportedAnimalDetails from "../../../screens/ReportedAnimalDetails"
 import routeNames from "../../../routes/routeNames"
 import { Stack, TestContainer } from "../index"
-import { createMockedServerTest } from "../../../mocks"
 import * as useNavigation from "../../../hooks/useNavigation"
+import * as SalvePatinhasService from "../../../services/SalvePatinhas"
 
 const mockedNavigationGoBack = jest.fn()
 
@@ -16,12 +16,19 @@ jest
   .spyOn(useNavigation, "default")
   .mockReturnValue({ goBack: mockedNavigationGoBack })
 
+jest.spyOn(SalvePatinhasService, "getReportedAnimalDetails").mockResolvedValue({
+  status: 200,
+  data: {
+    pictureUrl:
+      "https://www.portaldoanimal.org/wp-content/uploads/2018/06/Cinco-pequenas-crian%C3%A7as-salvaram-sozinhas-cachorro-abandonado-em-rua-movimentada1.jpg",
+    description:
+      "Visto em frente ao Extra Abolição, aparenta estar magro e possuía uma coleira preta",
+    address: "R. da Abolição, 2013 - Pte. Preta, Campinas - SP",
+  },
+})
+
 describe("ReportedAnimalDetails", () => {
-  let server
-
   beforeEach(() => {
-    server = createMockedServerTest()
-
     render(
       <TestContainer>
         <Stack.Screen
@@ -31,10 +38,6 @@ describe("ReportedAnimalDetails", () => {
         />
       </TestContainer>
     )
-  })
-
-  afterEach(() => {
-    server.shutdown()
   })
 
   it("should load the animal details", async () => {

@@ -7,7 +7,7 @@ import * as Location from "expo-location"
 import { useAnimalLocationContext } from "../../contexts/AnimalLocationContext"
 import AppActivityIndicator from "../AppActivityIndicator"
 import { showErrorMessage, showWarningMessage } from "../../utils"
-import appAxios from "../../abstractions/appAxios"
+import { getReportedAnimalsCoordsList } from "../../services/SalvePatinhas"
 
 const mapViewStyles = {
   width: Dimensions.get("screen").width,
@@ -64,7 +64,7 @@ export default function ReportedAnimalsMapView() {
 
   async function getReportedAnimalCoords() {
     try {
-      const response = await appAxios.get("reported-animals")
+      const response = await getReportedAnimalsCoordsList()
       setReportedAnimalCoords(response.data)
     } catch {
       showErrorMessage("Erro ao tentar obter animais reportados")
@@ -96,10 +96,10 @@ export default function ReportedAnimalsMapView() {
       testID={"MapView"}
     >
       {reportedAnimalsCoords &&
-        reportedAnimalsCoords.map(({ latitude, longitude }, index) => (
+        reportedAnimalsCoords.map(({ guid, latitude, longitude }, index) => (
           <ReportedAnimalSignalMarker
             key={index}
-            coordinate={{ latitude, longitude }}
+            coordinate={{ guid, latitude, longitude }}
           />
         ))}
     </MapView>

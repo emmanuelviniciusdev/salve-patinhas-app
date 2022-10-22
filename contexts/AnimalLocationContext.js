@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from "react"
-import appAxios from "../abstractions/appAxios"
+import { getReportedAnimalDetails } from "../services/SalvePatinhas"
 
 const initialState = {
   animalDetails: {
@@ -45,12 +45,7 @@ export function AnimalLocationProvider({ children }) {
     dispatch({ type: "SET_LOADING_ANIMAL_DETAILS", payload: true })
 
     try {
-      const response = await appAxios.get("reported-animal-details", {
-        params: {
-          latitude: coordinate.latitude,
-          longitude: coordinate.longitude,
-        },
-      })
+      const response = await getReportedAnimalDetails(coordinate.guid)
       dispatch({ type: "SET_ANIMAL_DETAILS", payload: response.data })
     } catch {
       dispatch({

@@ -10,12 +10,12 @@ import {
 } from "./styles"
 import ImageView from "react-native-image-viewing"
 import { useEffect, useState } from "react"
-import { Pressable, ScrollView, Text } from "react-native"
+import { Pressable, ScrollView } from "react-native"
 import EvaArrowBackFillSvg from "../../assets/icons/eva_arrow-back-fill.svg"
 import useNavigation from "../../hooks/useNavigation"
 import AppActivityIndicator from "../../components/AppActivityIndicator"
-import appAxios from "../../abstractions/appAxios"
 import { showErrorMessage } from "../../utils"
+import { getReportedAnimalDetails } from "../../services/SalvePatinhas"
 
 export default function ReportedAnimalDetails({ route }) {
   const { coordinate } = route.params
@@ -30,12 +30,7 @@ export default function ReportedAnimalDetails({ route }) {
 
   async function getFullAnimalDetails() {
     try {
-      const response = await appAxios.get("reported-animal-details", {
-        params: {
-          latitude: coordinate.latitude,
-          longitude: coordinate.longitude,
-        },
-      })
+      const response = await getReportedAnimalDetails(coordinate.guid)
       setFullAnimalDetails(response.data)
     } catch {
       showErrorMessage(
