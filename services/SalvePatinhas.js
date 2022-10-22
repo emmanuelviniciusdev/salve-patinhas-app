@@ -37,6 +37,8 @@ export async function getReportedAnimalsCoordsList(latitude, longitude) {
 }
 
 export async function postAnimalForAdoption(data) {
+  await Timeout.set(500)
+
   return {
     status: 201,
     data: {
@@ -60,6 +62,8 @@ export async function postAnimalForAdoption(data) {
 }
 
 export async function getAnimalsForAdoptionRegisteredByUserList(guidUser) {
+  await Timeout.set(500)
+
   const animals = Array.from({ length: 2 }).map((_, index) =>
     index % 2 === 0
       ? {
@@ -89,6 +93,8 @@ export async function getAnimalsForAdoptionRegisteredByUserList(guidUser) {
  *             contactInformation: { name: string; email: string; phone: string; }; }
  */
 export async function getAnimalForAdoptionDetails(guidAnimal) {
+  await Timeout.set(500)
+
   return {
     status: 200,
     data: {
@@ -112,18 +118,26 @@ export async function getAnimalForAdoptionDetails(guidAnimal) {
 }
 
 export async function getAnimalsForAdoption(currentPosition, total) {
-  try {
-    const response = await customAxios.get("animals-for-adoption", {
-      params: { currentPosition, total },
-    })
+  await Timeout.set(500)
 
-    return response.data
-  } catch (e) {
-    console.error(e)
-    throw new Error(
-      "Ocorreu um erro ao tentar obter lista de animais para adoção"
-    )
-  }
+  return Array.from({ length: total }).map((_, index) =>
+    index % 2 === 0
+      ? {
+          name: "Tobias",
+          pictureUrl:
+            "https://www.zooplus.ie/magazine/wp-content/uploads/2018/06/rough-collie-ie.jpg",
+          dateOfBirth: "2022-01-01",
+          city: "São Paulo",
+          state: "SP",
+        }
+      : {
+          name: "Lola",
+          pictureUrl: "https://grapee.jp/en/wp-content/uploads/74311_main1.jpg",
+          dateOfBirth: "2016-08-25",
+          city: "Campinas",
+          state: "SP",
+        }
+  )
 }
 
 export async function postReportAnimal(data) {}

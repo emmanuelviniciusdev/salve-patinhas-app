@@ -26,7 +26,7 @@ export default function AnimalAdoptionList() {
 
   const showList = !showFilters
 
-  async function getAnimalsList(total = 30, isFirstLoading = false) {
+  async function getAnimalsList(total = 15, isFirstLoading = false) {
     if (isFirstLoading) {
       setFirstLoadingAnimalsList(true)
     }
@@ -56,7 +56,7 @@ export default function AnimalAdoptionList() {
 
   useEffect(() => {
     ;(async () => {
-      await getAnimalsList(30, true)
+      await getAnimalsList(15, true)
     })()
   }, [])
 
@@ -107,7 +107,7 @@ export default function AnimalAdoptionList() {
                 text={"carregar mais"}
                 disabled={loadingAnimalsList}
                 loading={loadingAnimalsList}
-                onPress={async () => await getAnimalsList(30)}
+                onPress={async () => await getAnimalsList(15)}
                 testID={"AppButtonLoadMoreAnimals"}
               />
             </ViewMarginY20>

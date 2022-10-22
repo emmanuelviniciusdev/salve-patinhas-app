@@ -1,4 +1,3 @@
-import { createMockedServerTest } from "../../../mocks"
 import {
   fireEvent,
   render,
@@ -10,11 +9,7 @@ import routeNames from "../../../routes/routeNames"
 import AnimalAdoptionList from "../../../screens/AnimalAdoptionList"
 
 describe("AnimalAdoptionList", () => {
-  let server
-
   beforeEach(() => {
-    server = createMockedServerTest()
-
     render(
       <TestContainer>
         <Stack.Screen
@@ -25,20 +20,16 @@ describe("AnimalAdoptionList", () => {
     )
   })
 
-  afterEach(() => {
-    server.shutdown()
-  })
-
-  it("should render 30 cards of animals when the screen is opened by the first time", async () => {
+  it("should render 15 cards of animals when the screen is opened by the first time", async () => {
     await waitForElementToBeRemoved(() =>
       screen.getByTestId("AppActivityIndicator")
     )
 
     const cards = screen.queryAllByTestId("CardAnimalDetails")
-    expect(cards.length).toBe(30)
+    expect(cards.length).toBe(15)
   })
 
-  it("should render 60 cards after load more button is pressed", async () => {
+  it("should render 30 cards after load more button is pressed", async () => {
     await waitForElementToBeRemoved(() =>
       screen.getByTestId("AppActivityIndicator")
     )
@@ -51,6 +42,6 @@ describe("AnimalAdoptionList", () => {
     )
 
     const cards = screen.queryAllByTestId("CardAnimalDetails")
-    expect(cards.length).toBe(60)
+    expect(cards.length).toBe(30)
   })
 })
