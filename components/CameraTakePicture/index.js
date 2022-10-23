@@ -6,11 +6,16 @@ import {
   ViewBottomContent,
 } from "./styles"
 import { showErrorMessage } from "../../utils"
+import { useWindowDimensions } from "react-native"
 
 export default function CameraTakePicture({ onTakePicture }) {
   const [hasCameraPermission, setHasCameraPermission] = useState(false)
 
   const cameraRef = useRef()
+
+  const { width } = useWindowDimensions()
+
+  const height = Math.round((width * 16) / 9)
 
   async function requestCameraPermission() {
     await requestCameraPermissionsAsync()
@@ -47,7 +52,7 @@ export default function CameraTakePicture({ onTakePicture }) {
   }
 
   return (
-    <Camera style={cameraStyles} ref={cameraRef}>
+    <Camera style={{ width: "100%", height }} ref={cameraRef} ratio={"16:9"}>
       <ViewBottomContent>
         <PressableTakePicture
           testID={"PressableTakePicture"}
