@@ -23,7 +23,7 @@
       "supportsTablet": false
     },
     "android": {
-      "userInterfaceStyle": "light",
+      "userInterfaceStyle": "automatic",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

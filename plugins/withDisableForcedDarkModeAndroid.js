@@ -13,7 +13,7 @@ function setForceDarkModeToFalse(styles) {
     add: true,
     parent: AndroidConfig.Styles.getAppThemeLightNoActionBarGroup(),
     name: `android:forceDarkAllowed`,
-    value: "false",
+    value: false,
   })
 
   return styles
