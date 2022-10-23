@@ -28,10 +28,22 @@ export async function getReportedAnimalsCoordsList(latitude, longitude) {
   return {
     status: 200,
     data: [
-      { guid: "", latitude: -23.5329, longitude: -46.6874 },
-      { guid: "", latitude: -23.539, longitude: -46.6877 },
-      { guid: "", latitude: -23.5341, longitude: -46.688 },
-      { guid: "", latitude: -23.5345, longitude: -46.6885 },
+      { guid: "", latitude: -22.86024008665926, longitude: -47.10517831949013 },
+      {
+        guid: "",
+        latitude: -22.860341449710337,
+        longitude: -47.10605834558404,
+      },
+      {
+        guid: "",
+        latitude: -22.859789194929792,
+        longitude: -47.106373182505564,
+      },
+      {
+        guid: "",
+        latitude: -22.859257909731845,
+        longitude: -47.10600524056113,
+      },
     ],
   }
 }
@@ -67,6 +79,7 @@ export async function getAnimalsForAdoptionRegisteredByUserList(guidUser) {
   const animals = Array.from({ length: 2 }).map((_, index) =>
     index % 2 === 0
       ? {
+          guid: `guid-${index}`,
           name: "Tobias",
           pictureUrl:
             "https://www.zooplus.ie/magazine/wp-content/uploads/2018/06/rough-collie-ie.jpg",
@@ -75,6 +88,7 @@ export async function getAnimalsForAdoptionRegisteredByUserList(guidUser) {
           state: "SP",
         }
       : {
+          guid: `guid-${index}`,
           name: "Lola",
           pictureUrl: "https://grapee.jp/en/wp-content/uploads/74311_main1.jpg",
           dateOfBirth: "2016-08-25",

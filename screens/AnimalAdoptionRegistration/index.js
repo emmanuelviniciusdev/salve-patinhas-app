@@ -36,6 +36,14 @@ export default function AnimalAdoptionRegistration() {
     })()
   }, [])
 
+  function handleRemoveAnimal(removedGuidAnimal) {
+    const updatedRegisteredAnimals = registeredAnimals.filter(
+      (animal) => animal.guid !== removedGuidAnimal
+    )
+
+    setRegisteredAnimals(updatedRegisteredAnimals)
+  }
+
   if (loadingRegisteredAnimals) {
     return (
       <AppSafeAreaView>
@@ -68,12 +76,14 @@ export default function AnimalAdoptionRegistration() {
             registeredAnimals.map((animal, index) => (
               <ViewMarginTop10 key={index}>
                 <CardAnimalDetails
+                  guidAnimal={animal.guid}
                   name={animal.name}
                   dateOfBirth={animal.dateOfBirth}
                   city={animal.city}
                   state={animal.state}
                   pictureUrl={animal.pictureUrl}
                   actionType={"deleteAnimal"}
+                  onRemoveAnimal={handleRemoveAnimal}
                 />
               </ViewMarginTop10>
             ))}

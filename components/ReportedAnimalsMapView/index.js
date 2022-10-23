@@ -14,7 +14,7 @@ const mapViewStyles = {
   height: Dimensions.get("screen").height,
 }
 
-const LATITUDE_AND_LONGITUDE_DELTA = 0.015
+const LATITUDE_AND_LONGITUDE_DELTA = 0.0012
 
 export default function ReportedAnimalsMapView() {
   const systemColorScheme = useColorScheme()

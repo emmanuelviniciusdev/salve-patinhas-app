@@ -27,6 +27,7 @@ export default function CardAnimalDetails({
   state,
   pictureUrl,
   actionType = "openAnimalAdoptionDetails",
+  onRemoveAnimal = (removedGuidAnimal) => {},
 }) {
   const navigation = useNavigation()
 
@@ -40,15 +41,13 @@ export default function CardAnimalDetails({
     navigation.navigate(routeNames.ANIMAL_ADOPTION_DETAILS)
   }
 
-  function removeAnimal() {}
-
   function handleButtonAction() {
     if (actionType === "openAnimalAdoptionDetails") {
       openAnimalDetails()
       return
     }
 
-    removeAnimal()
+    onRemoveAnimal(guidAnimal)
   }
 
   return (
