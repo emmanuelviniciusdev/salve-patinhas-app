@@ -29,4 +29,5 @@ export const ViewPressableMenuOptionContent = styled.View`
 export const TextPressableMenuOption = styled.Text`
   margin-left: 5px;
   font-size: ${RFValue(24)}px;
+  color: ${(props) => props.theme.color};
 `
