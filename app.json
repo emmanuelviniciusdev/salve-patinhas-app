@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "salve-patinhas-app",
-    "slug": "salve-patinhas-app",
+    "name": "Salve Patinhas",
+    "slug": "salve-patinhas",
+    "owner": "emmanuelviniciusdev",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -14,20 +15,34 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "userInterfaceStyle": "automatic",
-      "supportsTablet": true
+      "supportsTablet": false
     },
     "android": {
-      "userInterfaceStyle": "automatic",
+      "userInterfaceStyle": "light",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.emmanuelviniciusdev.salvepatinhas",
+      "config": {
+        "googleMaps": {
+          "apiKey": ""
+        }
       }
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "9a03d0ae-5712-4245-bba5-e2771d30cc3e"
+      }
+    },
+    "plugins": ["./plugins/withDisableForcedDarkModeAndroid.js"]
   }
 }

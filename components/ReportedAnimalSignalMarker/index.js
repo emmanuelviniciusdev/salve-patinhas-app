@@ -42,6 +42,7 @@ export default function ReportedAnimalSignalMarker({ coordinate }) {
     <Marker
       coordinate={coordinate}
       onPress={() => setAnimalDetails(coordinate)}
+      style={{ width: 50, height: 50 }}
     >
       <ReportSignalMarkerIcon testID={"ReportSignalMarkerIcon"} />
     </Marker>

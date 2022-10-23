@@ -7,12 +7,14 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest ./__tests__/__integration__/screens/"
+    "test": "jest ./__tests__/__integration__/screens/",
+    "build-preview-android-sdk": "eas build -p android --profile preview-android-apk"
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.2.2",
     "@expo-google-fonts/nunito": "^0.2.2",
-    "@react-native-picker/picker": "^2.4.8",
+    "@expo/config-plugins": "^5.0.1",
+    "@react-native-picker/picker": "2.4.2",
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/native-stack": "^6.7.0",
     "await-timeout": "^1.1.1",
@@ -27,7 +29,7 @@
     "expo-status-bar": "~1.4.0",
     "moment": "^2.29.4",
     "react": "18.0.0",
-    "react-native": "0.69.5",
+    "react-native": "0.69.6",
     "react-native-flash-message": "^0.3.1",
     "react-native-image-viewing": "^0.2.2",
     "react-native-maps": "0.31.1",
