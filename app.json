@@ -5,12 +5,12 @@
     "owner": "emmanuelviniciusdev",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/Icon_1500x1500.png",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/Icon_1500x1500.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#F2F5F9"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -25,8 +25,8 @@
     "android": {
       "userInterfaceStyle": "automatic",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/images/Icon_1500x1500.png",
+        "backgroundColor": "#F2F5F9"
       },
       "package": "com.emmanuelviniciusdev.salvepatinhas",
       "config": {
