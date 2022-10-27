@@ -1,28 +1,36 @@
 import {
-  ContainerImageBackground,
   Container,
-  Logo,
   Paragraph,
   Title,
   WrapperPresentation,
   WrapperAuthButtons,
   ViewMarginTop5,
+  ImageAbsoluteDalmatian,
 } from "./styles"
-import imgPartialLogo from "../../assets/images/partial-logo.png"
-import humanHandsHoldingDogPawsPng from "../../assets/images/human-hands-holding-dog-paws.png"
+import DalmarianTransparentPng from "../../assets/images/dalmatian-transparent.png"
 import GoogleSvg from "../../assets/icons/google.svg"
 import MdiAppleSvg from "../../assets/icons/mdi_apple.svg"
+import FoundationPawWhiteSvg from "../../assets/icons/foundation_paw_white.svg"
+import FoundationPawBlackSvg from "../../assets/icons/foundation_paw_black.svg"
 import AppButton from "../../components/AppButton"
 import { useAuthenticationContext } from "../../contexts/AuthenticationContext"
+import AppSafeAreaView from "../../components/AppSafeAreaView"
+import { useColorScheme } from "react-native"
 
 export default function SignIn() {
   const { login } = useAuthenticationContext()
 
+  const systemColorScheme = useColorScheme()
+
+  const IconPawSvg =
+    systemColorScheme === "dark" ? FoundationPawWhiteSvg : FoundationPawBlackSvg
+
   return (
-    <ContainerImageBackground source={humanHandsHoldingDogPawsPng}>
+    <AppSafeAreaView>
+      <ImageAbsoluteDalmatian source={DalmarianTransparentPng} />
       <Container>
         <WrapperPresentation>
-          <Logo source={imgPartialLogo} />
+          <IconPawSvg />
           <Title>Salve Patinhas</Title>
           <Paragraph>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
@@ -45,6 +53,6 @@ export default function SignIn() {
           </ViewMarginTop5>
         </WrapperAuthButtons>
       </Container>
-    </ContainerImageBackground>
+    </AppSafeAreaView>
   )
 }
