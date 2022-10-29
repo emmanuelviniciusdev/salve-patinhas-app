@@ -26,6 +26,14 @@ export default function useCurrentPosition(showUIMessages = false) {
 
       const currentPosition = await Location.getCurrentPositionAsync()
 
+      /**
+       * TODO: Remote this mock.
+       *
+       * Mocks coordinates to facilitate tests with users.
+       */
+      currentPosition.coords.latitude = -22.8615
+      currentPosition.coords.longitude = -47.1051
+
       setCurrentPosition(currentPosition)
     } catch (e) {
       console.error(e)

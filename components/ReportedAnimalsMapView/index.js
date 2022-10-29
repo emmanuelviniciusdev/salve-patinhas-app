@@ -53,6 +53,14 @@ export default function ReportedAnimalsMapView() {
 
       const currentPosition = await Location.getCurrentPositionAsync()
 
+      /**
+       * TODO: Remote this mock.
+       *
+       * Mocks coordinates to facilitate tests with users.
+       */
+      currentPosition.coords.latitude = -22.8615
+      currentPosition.coords.longitude = -47.1051
+
       currentCoordsLocation.latitude = currentPosition.coords.latitude
       currentCoordsLocation.longitude = currentPosition.coords.longitude
     } catch (e) {
