@@ -33,9 +33,8 @@ export default function SignIn() {
           <IconPawSvg />
           <Title>Salve Patinhas</Title>
           <Paragraph>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-            pretium, augue id fringilla tincidunt, risus nibh iaculis turpis,
-            congue lobortis tortor mi sit amet diam.
+            Ajude na localização de animais perdidos ou abandonados. Adote ou dê
+            para adoção. Seja solidário e salve patinhas!
           </Paragraph>
         </WrapperPresentation>
         <WrapperAuthButtons>
