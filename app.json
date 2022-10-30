@@ -25,7 +25,7 @@
     "android": {
       "userInterfaceStyle": "automatic",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/Icon_1500x1500.png",
+        "foregroundImage": "./assets/images/Splash_Icon.png",
         "backgroundColor": "#F2F5F9"
       },
       "package": "com.emmanuelviniciusdev.salvepatinhas",
