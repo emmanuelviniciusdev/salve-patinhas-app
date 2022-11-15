@@ -49,7 +49,7 @@ describe("AnimalAdoptionRegistration", () => {
 
     expect(screen.queryAllByTestId("CardAnimalDetails").length).toBe(2)
 
-    expect(screen.queryByText("Tobias, 9 meses")).toBeTruthy()
+    expect(screen.queryByText("Tobias, 10 meses")).toBeTruthy()
     expect(screen.queryByText("São Paulo, SP")).toBeTruthy()
 
     expect(screen.queryByText("Lola, 6 anos")).toBeTruthy()
